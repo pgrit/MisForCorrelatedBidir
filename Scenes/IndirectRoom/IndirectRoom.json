@@ -1,0 +1,477 @@
+{
+  "materials": [
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.09651825577020645,
+          0.20243392884731293,
+          0.22025571763515472
+        ]
+      },
+      "name": "AccentWall"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "name": "Border"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.008023192174732685,
+          0.009134061634540558,
+          0.01032982487231493
+        ]
+      },
+      "roughness": 0.8907563090324402,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Cabinet"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.33432310819625854,
+          0.33432310819625854,
+          0.33432310819625854
+        ]
+      },
+      "roughness": 0.34873950481414795,
+      "anisotropic": 0.411764919757843,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.6638655662536621,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "CabinetHandle"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.015229709446430206,
+          0.03524179384112358,
+          0.042027655988931656
+        ]
+      },
+      "roughness": 0.9285714626312256,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Carpet"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.09462588280439377,
+          0.09462588280439377,
+          0.09462588280439377
+        ]
+      },
+      "roughness": 0.5,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "CarpetRim"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.8829232454299927,
+          0.8829232454299927,
+          0.8829232454299927
+        ]
+      },
+      "name": "Ceiling"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.05780261754989624,
+          0.00884927436709404,
+          0.005048304796218872
+        ]
+      },
+      "roughness": 1.0,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "ChairFabric"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.06680668890476227,
+          0.06680668890476227,
+          0.06680668890476227
+        ]
+      },
+      "roughness": 0.21666666865348816,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 1.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "ChairMetal"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.035217974334955215,
+          0.035217974334955215,
+          0.035217974334955215
+        ]
+      },
+      "roughness": 0.6916670203208923,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "ChairPlastic"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.25294366478919983,
+          0.25294366478919983,
+          0.25294366478919983
+        ]
+      },
+      "roughness": 0.6833333373069763,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "ChairRubber"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.0946255624294281,
+          0.0946255624294281,
+          0.0946255624294281
+        ]
+      },
+      "roughness": 0.5336134433746338,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.40336135029792786,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "DeskLegs"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.37123775482177734,
+          0.28314879536628723,
+          0.18447501957416534
+        ]
+      },
+      "roughness": 0.3403361439704895,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "DeskWood"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "name": "Dots_Stroke"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      "emission": {
+        "type": "rgb",
+        "value": [
+          0.8166635632514954,
+          0.8793951272964478,
+          1.0
+        ]
+      },
+      "name": "FillLight"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.1626407504081726,
+          0.11522582173347473,
+          0.06680198758840561
+        ]
+      },
+      "roughness": 0.5499999523162842,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Floor"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "roughness": 0.0010000000474974513,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 1.0,
+      "specularTint": 0.0,
+      "name": "Glass-r-001"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.025393981486558914,
+          0.025393981486558914,
+          0.025393981486558914
+        ]
+      },
+      "roughness": 0.5333333015441895,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Keyboard"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.28829658031463623,
+          0.28829658031463623,
+          0.28829658031463623
+        ]
+      },
+      "roughness": 0.3083333373069763,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.7333333492279053,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "LampCord"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.9981558918952942,
+          0.9747959971427917,
+          0.8906244039535522
+        ]
+      },
+      "roughness": 1.0,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 1.0,
+      "specularTint": 0.0,
+      "name": "LampShade"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      "emission": {
+        "type": "rgb",
+        "value": [
+          5000.0,
+          4422.790110111237,
+          3712.260127067566
+        ]
+      },
+      "name": "LightBulb"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.24619419872760773,
+          0.24619419872760773,
+          0.24619419872760773
+        ]
+      },
+      "roughness": 0.5,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "MonitorBase"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.02720997855067253,
+          0.02720997855067253,
+          0.02720997855067253
+        ]
+      },
+      "name": "MonitorScreen"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.42922651767730713,
+          0.28903502225875854,
+          0.15893416106700897
+        ]
+      },
+      "roughness": 0.8109244108200073,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "MonitorStand"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "texture",
+        "path": "Waldweiher.jpg"
+      },
+      "name": "Picture"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.7489143013954163,
+          0.7742716073989868,
+          0.6815036535263062
+        ]
+      },
+      "name": "Walls"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.02365071512758732,
+          0.023451877757906914,
+          0.022853663191199303
+        ]
+      },
+      "name": "WoodFrame"
+    }
+  ],
+  "transforms": [
+    {
+      "name": "camera",
+      "position": [
+        -1.0522772073745728,
+        1.8065263032913208,
+        3.516710042953491
+      ],
+      "rotation": [
+        -6.316051005951039,
+        -23.834655448433175,
+        179.99897255595414
+      ],
+      "scale": [
+        -1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "cameras": [
+    {
+      "fov": 29.698316501828472,
+      "transform": "camera",
+      "name": "default",
+      "type": "perspective"
+    }
+  ],
+  "objects": [
+    {
+      "name": "scene",
+      "type": "obj",
+      "relativePath": "IndirectRoom.obj"
+    }
+  ]
+}

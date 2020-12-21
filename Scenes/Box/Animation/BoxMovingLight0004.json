@@ -1,0 +1,143 @@
+{
+  "materials": [
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "name": "Ceiling"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "name": "Dots_Stroke"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.1424006223678589,
+          0.09336355328559875,
+          0.0627109631896019
+        ]
+      },
+      "name": "Floor"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      "emission": {
+        "type": "rgb",
+        "value": [
+          3000.0,
+          3000.0,
+          3000.0
+        ]
+      },
+      "name": "Light"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "roughness": 0.4000000059604645,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Material"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.2810097336769104,
+          0.2810097336769104,
+          0.2810097336769104
+        ]
+      },
+      "roughness": 0.625,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.550000011920929,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Material.001"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.9258264303207397,
+          0.8940551280975342,
+          0.6698402166366577
+        ]
+      },
+      "name": "Walls"
+    }
+  ],
+  "transforms": [
+    {
+      "name": "camera",
+      "position": [
+        0.0,
+        0.998407781124115,
+        4.429999828338623
+      ],
+      "rotation": [
+        2.5044781608585254e-06,
+        0.0,
+        180.0
+      ],
+      "scale": [
+        -1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "cameras": [
+    {
+      "fov": 29.698316501828472,
+      "transform": "camera",
+      "name": "default",
+      "type": "perspective"
+    }
+  ],
+  "objects": [
+    {
+      "name": "scene",
+      "type": "obj",
+      "relativePath": "BoxMovingLight0004.obj"
+    }
+  ]
+}
