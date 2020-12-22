@@ -13,7 +13,6 @@ namespace MisForCorrelatedBidir.Common {
         public int NumTrainingSamples = 1;
         public bool ResetAfterTraining = false;
         public VarAwareMisVcm Prepass;
-        public bool SimplifiedVarianceFactors = false;
 
         public override void RegisterSample(ColorRGB weight, float misWeight, Vector2 pixel,
                                             int cameraPathLength, int lightPathLength, int fullLength) {
@@ -38,8 +37,7 @@ namespace MisForCorrelatedBidir.Common {
             else {
                 if (NumLightPaths == 0) NumLightPaths = scene.FrameBuffer.Width * scene.FrameBuffer.Height;
                 varianceFactors = new MergeVarianceFactors(MaxDepth, scene.FrameBuffer.Width,
-                                                           scene.FrameBuffer.Height, SimplifiedVarianceFactors,
-                                                           NumLightPaths);
+                    scene.FrameBuffer.Height, NumLightPaths);
             }
             base.Render(scene);
 

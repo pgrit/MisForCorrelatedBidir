@@ -18,20 +18,7 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                 {"LivingRoom", new VcmExperiment(new LivingRoom()) },
                 {"MinimalistWhiteRoom", new VcmExperiment(new MinimalistWhiteRoom()) },
             }, (int)(640 * resolutionScale), (int)(480 * resolutionScale));
-
-            List<string> sceneFilter = new() {
-                "ModernHall",
-                "BananaRange",
-                "ContemporaryBathroom",
-                "HomeOffice",
-                "RoughGlasses",
-                "RoughGlassesIndirect",
-                "IndirectRoom",
-                "LivingRoom",
-                "MinimalistWhiteRoom",
-            };
-
-            bench.Run(sceneFilter, forceReference: false);
+            bench.Run(forceReference: false);
         }
 
         static void RunFovExperiment() {
@@ -61,8 +48,8 @@ namespace MisForCorrelatedBidir.VcmExperiment {
 
         static void Main(string[] args) {
             CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-            // RunBench();
-            RunFovExperiment();
+            RunBench();
+            // RunFovExperiment();
         }
     }
 }

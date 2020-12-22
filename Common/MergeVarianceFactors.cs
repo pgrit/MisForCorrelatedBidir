@@ -1,26 +1,28 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
+using System.Threading.Tasks;
 using SeeSharp.Core.Image;
 using SeeSharp.Core.Shading;
 
 namespace MisForCorrelatedBidir.Common {
     public class MergeVarianceFactors {
-        public MergeVarianceFactors(int maxDepth, int width, int height, bool simplify, int numPaths) {
+        public MergeVarianceFactors(int maxDepth, int width, int height, int numPaths) {
             this.maxDepth = maxDepth;
-            this.simplify = simplify;
             this.numPaths = numPaths;
 
-            moments = new List<List<Image<ColorRGB>>>(maxDepth - 2);
-            pixelValues = new List<List<Image<ColorRGB>>>(maxDepth - 2);
-            varianceFactors = new List<List<Image<ColorRGB>>>(maxDepth - 2);
+            moments = new(maxDepth - 2);
+            pixelValues = new(maxDepth - 2);
+            varianceFactors = new(maxDepth - 2);
             for (int len = 3; len <= maxDepth; ++len) { // all depths with correlated merges (i.e., no DI)
-                moments.Add(new List<Image<ColorRGB>>(len - 2));
-                pixelValues.Add(new List<Image<ColorRGB>>(len - 2));
-                varianceFactors.Add(new List<Image<ColorRGB>>(len - 2));
+                moments.Add(new(len - 2));
+                pixelValues.Add(new(len - 2));
+                varianceFactors.Add(new(len - 2));
                 for (int i = 2; i < len; ++i) { // all merges with correlation for paths of length "len"
-                    moments[^1].Add(new Image<ColorRGB>(width, height));
-                    pixelValues[^1].Add(new Image<ColorRGB>(width, height));
-                    varianceFactors[^1].Add(new Image<ColorRGB>(width, height));
+                    moments[^1].Add(new(width, height));
+                    pixelValues[^1].Add(new(width, height));
+                    varianceFactors[^1].Add(new(width, height));
                 }
             }
         }
@@ -30,12 +32,12 @@ namespace MisForCorrelatedBidir.Common {
 
             // Scale values of the previous iteration to account for having more samples
             if (curIteration > 1) {
-                for (int i = 0; i < moments.Count; ++i) {
+                Parallel.For(0, moments.Count, i => {
                     for (int k = 0; k < moments[i].Count; ++k) {
                         moments[i][k].Scale((curIteration - 1.0f) / curIteration);
                         pixelValues[i][k].Scale((curIteration - 1.0f) / curIteration);
                     }
-                }
+                });
             }
         }
 
@@ -43,52 +45,47 @@ namespace MisForCorrelatedBidir.Common {
             int width = moments[0][0].Width;
             int height = moments[0][0].Height;
             var filter = new BoxFilter(4);
-            Image<ColorRGB> momentBuffer = new Image<ColorRGB>(width, height);
-            Image<ColorRGB> varianceBuffer = new Image<ColorRGB>(width, height);
+            Image<Scalar> momentBuffer = new(width, height);
+            Image<Scalar> varianceBuffer = new(width, height);
 
             // Compute the variance factors for use in the next iteration
-            for (int i = 0; i < moments.Count; ++i) {
+            Parallel.For(0, moments.Count, i => {
                 for (int k = 0; k < moments[i].Count; ++k) {
                     // Estimate the pixel variances:
                     // First, we blur the image. Then, we subtract the blurred version from the original.
                     // Finally, we compute and square the difference, multiplying by the number of iterations
                     // to obtain a coarse estimate of the variance in a single iteration.
                     filter.Apply(pixelValues[i][k], varianceBuffer);
-                    for (int row = 0; row < height; ++row) {
+                    Parallel.For(0, height, row => {
                         for (int col = 0; col < width; ++col) {
-                            var value = pixelValues[i][k][col, row];
-                            var delta = value - varianceBuffer[col, row];
+                            var value = pixelValues[i][k][col, row].Value;
+                            var delta = value - varianceBuffer[col, row].Value;
                             var variance = delta * delta * curIteration;
-
-                            if (simplify) {
-                                varianceBuffer[col, row] = variance + value * value;
-                            } else {
-                                varianceBuffer[col, row] = variance;
-                            }
+                            varianceBuffer[col, row] = new(variance);
                         }
-                    }
+                    });
                     filter.Apply(varianceBuffer, varianceFactors[i][k]);
 
                     // Also filter the second moment estimates
                     filter.Apply(moments[i][k], momentBuffer);
 
                     // Compute the ratio for all non-zero pixels
-                    for (int row = 0; row < height; ++row) {
+                    Parallel.For(0, height, row => {
                         for (int col = 0; col < width; ++col) {
-                            var variance = varianceFactors[i][k][col, row].Average;
-                            var moment = momentBuffer[col, row].Average;
+                            var variance = varianceFactors[i][k][col, row].Value;
+                            var moment = momentBuffer[col, row].Value;
                             if (variance > 0 && moment > 0) {
-                                varianceBuffer[col, row] = ColorRGB.White * (moment / variance);
+                                varianceBuffer[col, row] = new(moment / variance);
                             } else {
-                                varianceBuffer[col, row] = ColorRGB.White;
+                                varianceBuffer[col, row] = new(1);
                             }
                         }
-                    }
+                    });
 
                     // Apply a wide filter to the ratio image, too
                     filter.Apply(varianceBuffer, varianceFactors[i][k]);
                 }
-            }
+            });
 
             isReady = true;
         }
@@ -97,33 +94,35 @@ namespace MisForCorrelatedBidir.Common {
                         Vector2 filmPoint, ColorRGB value) {
             bool isMerge = lightPathEdges > 0 && lightPathEdges + cameraPathEdges == totalEdges;
             if (isMerge && cameraPathEdges > 1) { // Primary merges have zero covariance
-                moments[totalEdges - 3][cameraPathEdges - 2].Splat(filmPoint.X, filmPoint.Y, value * value / curIteration);
-                pixelValues[totalEdges - 3][cameraPathEdges - 2].Splat(filmPoint.X, filmPoint.Y, value / curIteration);
+                float v = value.Average;
+                moments[totalEdges - 3][cameraPathEdges - 2].
+                    Splat(filmPoint.X, filmPoint.Y, new(v * v / curIteration));
+                pixelValues[totalEdges - 3][cameraPathEdges - 2].
+                    Splat(filmPoint.X, filmPoint.Y, new(v / curIteration));
             }
         }
 
         public float Get(int cameraPathEdges, int totalEdges, Vector2 filmPoint) {
             if (!isReady) return 1.0f;
             if (cameraPathEdges < 2) return 1.0f;
-            return varianceFactors[totalEdges - 3][cameraPathEdges - 2][filmPoint.X, filmPoint.Y].R;
+            return varianceFactors[totalEdges - 3][cameraPathEdges - 2][filmPoint.X, filmPoint.Y].Value;
         }
 
         public void WriteToFiles(string basename) {
             for (int i = 0; i < varianceFactors.Count; ++i) {
                 for (int k = 0; k < varianceFactors[i].Count; ++k) {
                     var filename = $"{basename}-depth-{i+3}-merge-{k+2}.exr";
-                    Image<ColorRGB>.WriteToFile(varianceFactors[i][k], filename);
+                    Image<Scalar>.WriteToFile(varianceFactors[i][k], filename);
                 }
             }
         }
 
         bool isReady = false;
-        bool simplify;
         int curIteration = 0;
         int maxDepth;
         int numPaths;
-        List<List<Image<ColorRGB>>> moments;
-        List<List<Image<ColorRGB>>> pixelValues; // TODO we could also use grayscale (luminance) estimates for value and moment
-        List<List<Image<ColorRGB>>> varianceFactors; // TODO this should be a grayscale image to save memory
+        List<List<Image<Scalar>>> moments;
+        List<List<Image<Scalar>>> pixelValues;
+        List<List<Image<Scalar>>> varianceFactors;
     }
 }
