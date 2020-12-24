@@ -31,7 +31,7 @@ namespace MisForCorrelatedBidir.Common {
     public class ModernHall : SceneConfig {
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.ClassicBidir() {
-            MaxDepth = MaxDepth, NumIterations = 512, BaseSeedCamera = 971612, BaseSeedLight = 175037
+            MaxDepth = MaxDepth, NumIterations = 5000, BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/ModernHall/ModernHall.json");
@@ -40,7 +40,7 @@ namespace MisForCorrelatedBidir.Common {
     public class BananaRange : SceneConfig {
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.ClassicBidir() {
-            MaxDepth = MaxDepth, NumIterations = 128, BaseSeedCamera = 971612, BaseSeedLight = 175037
+            MaxDepth = MaxDepth, NumIterations = 512, BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/BananaRange/banana_range.json");
@@ -49,7 +49,7 @@ namespace MisForCorrelatedBidir.Common {
     public class ContemporaryBathroom : SceneConfig {
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.ClassicBidir() {
-            MaxDepth = MaxDepth, NumIterations = 2048, BaseSeedCamera = 971612, BaseSeedLight = 175037
+            MaxDepth = MaxDepth, NumIterations = 20000, BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/ContemporaryBathroom/contemporary_bathroom.json");
@@ -58,7 +58,7 @@ namespace MisForCorrelatedBidir.Common {
     public class HomeOffice : SceneConfig {
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.ClassicBidir() {
-            MaxDepth = MaxDepth, NumIterations = 2048, BaseSeedCamera = 971612, BaseSeedLight = 175037
+            MaxDepth = MaxDepth, NumIterations = 20000, BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/HomeOffice/office.json");
@@ -68,7 +68,7 @@ namespace MisForCorrelatedBidir.Common {
         public override int MaxDepth => 10;
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.VertexConnectionAndMerging() {
-            MaxDepth = MaxDepth, NumIterations = 5000,
+            MaxDepth = MaxDepth, NumIterations = 20000,
             BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
@@ -94,7 +94,7 @@ namespace MisForCorrelatedBidir.Common {
         public override int MaxDepth => 10;
         public override Integrator MakeReferenceIntegrator()
         => new Common.PdfRatioVcm() {
-            MaxDepth = MaxDepth, NumIterations = 10000,
+            MaxDepth = MaxDepth, NumIterations = 20000,
             BaseSeedCamera = 971612, BaseSeedLight = 175037,
             RadiusInitializer = new RadiusInitCombined {
                 Candidates = new() {
@@ -126,7 +126,7 @@ namespace MisForCorrelatedBidir.Common {
         public override int MaxDepth => 10;
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.ClassicBidir() {
-            MaxDepth = MaxDepth, NumIterations = 1024, BaseSeedCamera = 971612, BaseSeedLight = 175037
+            MaxDepth = MaxDepth, NumIterations = 10000, BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/IndirectRoom/IndirectRoom.json");
@@ -136,7 +136,7 @@ namespace MisForCorrelatedBidir.Common {
         public override int MaxDepth => 10;
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.VertexConnectionAndMerging() {
-            MaxDepth = MaxDepth, NumIterations = 2048, BaseSeedCamera = 971612, BaseSeedLight = 175037
+            MaxDepth = MaxDepth, NumIterations = 10000, BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/LivingRoom/LivingRoomVCM.json");
@@ -145,7 +145,7 @@ namespace MisForCorrelatedBidir.Common {
     public class MinimalistWhiteRoom : SceneConfig {
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.ClassicBidir() {
-            MaxDepth = MaxDepth, NumIterations = 1024, BaseSeedCamera = 971612, BaseSeedLight = 175037
+            MaxDepth = MaxDepth, NumIterations = 10000, BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/MinimalistWhiteRoom/MinWhite.json");

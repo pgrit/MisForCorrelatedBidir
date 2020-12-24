@@ -46,7 +46,7 @@ namespace MisForCorrelatedBidir.BidirExperiment {
                     NumShadowRays = SplitFactor, RenderTechniquePyramid = false,
                     RadiusInitializer = new RadiusInitCombined {
                         Candidates = new() {
-                            new RadiusInitFov { ScalingFactor = MathF.Pow(5 * MathF.PI / 180, 2) },
+                            new RadiusInitFov { ScalingFactor = MathF.Pow(10 * MathF.PI / 180, 2) },
                             new RadiusInitScene { ScalingFactor = 0.01f }
                         }
                     }
