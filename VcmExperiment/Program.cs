@@ -17,6 +17,8 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                 {"IndirectRoom", new VcmExperiment(new IndirectRoom()) },
                 {"LivingRoom", new VcmExperiment(new LivingRoom()) },
                 {"MinimalistWhiteRoom", new VcmExperiment(new MinimalistWhiteRoom()) },
+                {"LampCausticNoShade", new VcmExperiment(new LampCausticNoShade()) },
+                {"LampCaustic", new VcmExperiment(new LampCaustic()) },
             }, (int)(640 * resolutionScale), (int)(480 * resolutionScale));
             bench.Run(forceReference: false);
         }

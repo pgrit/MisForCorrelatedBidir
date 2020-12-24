@@ -40,20 +40,27 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                 new Method("PdfRatioFov", new PdfRatioVcm() {
                     MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
-                    Mode = PdfRatioVcm.FootprintMode.CameraAngle,
-                    ScalingFactor = MathF.Pow(10 * MathF.PI / 180, 2)
+                    RadiusInitializer = new RadiusInitFov { ScalingFactor = MathF.Pow(5 * MathF.PI / 180, 2) }
                 }),
                 new Method("PdfRatioScene", new PdfRatioVcm() {
                     MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
-                    Mode = PdfRatioVcm.FootprintMode.SceneSize,
-                    ScalingFactor = 0.01f
+                    RadiusInitializer = new RadiusInitScene { ScalingFactor = 0.01f }
                 }),
                 new Method("PdfRatioPixel", new PdfRatioVcm() {
                     MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
-                    Mode = PdfRatioVcm.FootprintMode.Pixel,
-                    ScalingFactor = 50
+                    RadiusInitializer = new RadiusInitPixel { ScalingFactor = 50 }
+                }),
+                new Method("PdfRatioCombined", new PdfRatioVcm() {
+                    MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                    RenderTechniquePyramid = false,
+                    RadiusInitializer = new RadiusInitCombined {
+                        Candidates = new() {
+                            new RadiusInitFov { ScalingFactor = MathF.Pow(5 * MathF.PI / 180, 2) },
+                            new RadiusInitScene { ScalingFactor = 0.01f }
+                        }
+                    }
                 }),
 
                 new Method("JendersieFootprint", new JendersieFootprint() {

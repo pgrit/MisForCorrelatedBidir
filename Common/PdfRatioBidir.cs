@@ -5,14 +5,7 @@ using SeeSharp.Integrators.Common;
 
 namespace MisForCorrelatedBidir.Common {
     public class PdfRatioBidir : SeeSharp.Integrators.Bidir.ClassicBidir {
-        public enum FootprintMode {
-            SceneSize,
-            Pixel,
-            CameraAngle
-        }
-        public FootprintMode Mode = FootprintMode.Pixel;
-        public float ScalingFactor = 50;
-        public bool UseUpperBound = false;
+        public RadiusInitializer RadiusInitializer;
 
         public float ComputeNeeFactor(BidirPathPdfs pdfs, PathVertex? lightVertex, int numPdfs,
                                       int lastCameraVertexIdx, float pdfNextEvent, float distToCam) {
@@ -21,22 +14,7 @@ namespace MisForCorrelatedBidir.Common {
             }
 
             // Set a radius for the probability approximations.
-            float radius;
-            switch (Mode) {
-                case FootprintMode.SceneSize:
-                    radius = scene.Radius * scene.Radius * ScalingFactor;
-                    break;
-
-                case FootprintMode.Pixel:
-                    float pixelRadius = 1 / MathF.Sqrt(pdfs.PdfsCameraToLight[0] * MathF.PI);
-                    radius = pixelRadius * ScalingFactor;
-                    break;
-
-                case FootprintMode.CameraAngle:
-                default:
-                    radius = distToCam * distToCam * ScalingFactor;
-                    break;
-            }
+            float radius = RadiusInitializer.ComputeRadius(scene.Radius, pdfs.PdfsCameraToLight[0], distToCam);
             float acceptArea = radius * radius * MathF.PI;
 
             // Compute the camera path determinism up until the last vertex
@@ -59,8 +37,8 @@ namespace MisForCorrelatedBidir.Common {
             float nextEventProbability = acceptArea * pdfNextEvent / NumShadowRays;
             nextEventProbability = MathF.Min(nextEventProbability, 1.0f);
 
-            float denominator = cameraProbability + nextEventProbability - cameraProbability * nextEventProbability;
-            float factor = cameraProbability / denominator;
+            float denom = cameraProbability + nextEventProbability - cameraProbability * nextEventProbability;
+            float factor = cameraProbability / denom;
 
             // Make sure that we only ever increase the weight, going below the provable upper bound
             // will always hurt the outcome!

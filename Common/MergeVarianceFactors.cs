@@ -49,7 +49,7 @@ namespace MisForCorrelatedBidir.Common {
             Image<Scalar> varianceBuffer = new(width, height);
 
             // Compute the variance factors for use in the next iteration
-            Parallel.For(0, moments.Count, i => {
+            for (int i = 0; i < moments.Count; ++i) {
                 for (int k = 0; k < moments[i].Count; ++k) {
                     // Estimate the pixel variances:
                     // First, we blur the image. Then, we subtract the blurred version from the original.
@@ -85,7 +85,7 @@ namespace MisForCorrelatedBidir.Common {
                     // Apply a wide filter to the ratio image, too
                     filter.Apply(varianceBuffer, varianceFactors[i][k]);
                 }
-            });
+            }
 
             isReady = true;
         }

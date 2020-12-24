@@ -1,0 +1,235 @@
+{
+  "materials": [
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "name": "Dots_Stroke"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      "emission": {
+        "type": "rgb",
+        "value": [
+          2.3796794414520264,
+          2.826952278614044,
+          3.0
+        ]
+      },
+      "name": "FillLight"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          1.0,
+          1.0,
+          1.0
+        ]
+      },
+      "roughness": 0.0,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 1.0,
+      "specularTint": 0.0,
+      "name": "Glass"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "roughness": 0.0010000000474974513,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 1.0,
+      "specularTint": 0.0,
+      "name": "Glass-r-001"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "roughness": 0.5,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "LampBase"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.9578230381011963,
+          1.0,
+          0.9390880465507507
+        ]
+      },
+      "roughness": 1.0,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 1.0,
+      "specularTint": 0.0,
+      "name": "LampShade"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      "emission": {
+        "type": "rgb",
+        "value": [
+          10000.0,
+          8923.50971698761,
+          7711.2579345703125
+        ]
+      },
+      "name": "LightBulbFilaments"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.5287831425666809,
+          0.5287831425666809,
+          0.5287831425666809
+        ]
+      },
+      "roughness": 0.28756478428840637,
+      "anisotropic": 0.24352332949638367,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.8756476640701294,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.3212435245513916,
+      "name": "LightbulbMetal"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.800000011920929,
+          0.800000011920929,
+          0.800000011920929
+        ]
+      },
+      "roughness": 0.4000000059604645,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Material"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.4262138605117798,
+          0.4262138605117798,
+          0.4262138605117798
+        ]
+      },
+      "roughness": 0.7331606149673462,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Table"
+    },
+    {
+      "type": "generic",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0.057423461228609085,
+          0.08113199472427368,
+          0.12988583743572235
+        ]
+      },
+      "roughness": 0.8575129508972168,
+      "anisotropic": 0.0,
+      "IOR": 1.4500000476837158,
+      "metallic": 0.0,
+      "specularTransmittance": 0.0,
+      "specularTint": 0.0,
+      "name": "Wall"
+    }
+  ],
+  "transforms": [
+    {
+      "name": "camera",
+      "position": [
+        0.16665397584438324,
+        0.4010750353336334,
+        0.9312533140182495
+      ],
+      "rotation": [
+        -14.000164086377126,
+        -0.7387214041994034,
+        180.00007386898153
+      ],
+      "scale": [
+        -1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "cameras": [
+    {
+      "fov": 29.698316501828472,
+      "transform": "camera",
+      "name": "default",
+      "type": "perspective"
+    }
+  ],
+  "objects": [
+    {
+      "name": "scene",
+      "type": "obj",
+      "relativePath": "LampCausticNoShade.obj"
+    }
+  ]
+}

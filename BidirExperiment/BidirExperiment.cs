@@ -41,12 +41,15 @@ namespace MisForCorrelatedBidir.BidirExperiment {
                     MaxDepth = Scene.MaxDepth, NumIterations = Samples,
                     NumShadowRays = SplitFactor, RenderTechniquePyramid = false,
                 }),
-
                 new Method("PdfRatio", new PdfRatioBidir() {
                     MaxDepth = Scene.MaxDepth, NumIterations = Samples,
                     NumShadowRays = SplitFactor, RenderTechniquePyramid = false,
-                    Mode = PdfRatioBidir.FootprintMode.CameraAngle,
-                    ScalingFactor = MathF.Pow(10 * MathF.PI / 180, 2)
+                    RadiusInitializer = new RadiusInitCombined {
+                        Candidates = new() {
+                            new RadiusInitFov { ScalingFactor = MathF.Pow(5 * MathF.PI / 180, 2) },
+                            new RadiusInitScene { ScalingFactor = 0.01f }
+                        }
+                    }
                 })
             };
         }

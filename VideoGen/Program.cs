@@ -1,6 +1,5 @@
-﻿using System;
+﻿using SeeSharp.Experiments;
 using System.Collections.Generic;
-using Experiment3;
 
 namespace MisForCorrelatedBidir.VideoGen {
     class Program {

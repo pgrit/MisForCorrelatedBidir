@@ -3896,7 +3896,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\pic2.jpg"
+        "path": "Textures/pic2.jpg"
       },
       "name": "Default_OBJ.230"
     },
@@ -3904,7 +3904,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\pic3.jpg"
+        "path": "Textures/pic3.jpg"
       },
       "name": "Default_OBJ.231"
     },
@@ -3912,7 +3912,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\pic4.jpg"
+        "path": "Textures/pic4.jpg"
       },
       "name": "Default_OBJ.232"
     },
@@ -3920,7 +3920,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\pic1.jpg"
+        "path": "Textures/pic1.jpg"
       },
       "name": "Default_OBJ.233"
     },
@@ -4840,7 +4840,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\Arch33_025_fabric_color.jpg"
+        "path": "Textures/Arch33_025_fabric_color.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -4854,7 +4854,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\fabric.jpg"
+        "path": "Textures/fabric.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -4868,7 +4868,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\archinteriors_vol6_003_floor.jpg"
+        "path": "Textures/archinteriors_vol6_003_floor.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -4882,7 +4882,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\Arch31_062_flower_yellow.jpg"
+        "path": "Textures/Arch31_062_flower_yellow.jpg"
       },
       "name": "flower"
     },
@@ -5062,7 +5062,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\archinteriors_vol6_003_wood3.jpg"
+        "path": "Textures/archinteriors_vol6_003_wood3.jpg"
       },
       "name": "Table"
     },
@@ -5070,7 +5070,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\plaster.jpg"
+        "path": "Textures/plaster.jpg"
       },
       "name": "Walls"
     },
@@ -5090,7 +5090,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\archinteriors_vol6_003_wood2.jpg"
+        "path": "Textures/archinteriors_vol6_003_wood2.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -5104,7 +5104,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Old\\LivingRoom\\Textures\\archinteriors_vol6_003_wood1.jpg"
+        "path": "Textures/archinteriors_vol6_003_wood1.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,

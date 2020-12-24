@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using SeeSharp.Core;
 using SeeSharp.Integrators;
 using SeeSharp.Integrators.Bidir;
 using SeeSharp.Core.Image;
+using MisForCorrelatedBidir.Common;
 
 namespace MisForCorrelatedBidir.VideoGen {
     abstract class ExperimentSetup : SeeSharp.Experiments.ExperimentFactory {
@@ -20,13 +22,18 @@ namespace MisForCorrelatedBidir.VideoGen {
                     RenderTechniquePyramid = true, EnableLightTracing = false,
                     EnableConnections = false, EnableNextEvent = false, EnableBsdfLightHit = false
                 }),
-                new Method("PdfRatio", new Experiment3.PdfRatioVcm() {
+                new Method("PdfRatio", new PdfRatioVcm() {
                     MaxDepth = MaxDepth, NumIterations = Samples, MergePrimary = true,
                     RenderTechniquePyramid = true, EnableLightTracing = false,
                     EnableConnections = false, EnableNextEvent = false, EnableBsdfLightHit = false,
-                    UseAlternative = true,
+                    RadiusInitializer = new RadiusInitCombined {
+                        Candidates = new() {
+                            new RadiusInitFov { ScalingFactor = MathF.Pow(5 * MathF.PI / 180, 2) },
+                            new RadiusInitScene { ScalingFactor = 0.01f }
+                        }
+                    }
                 }),
-                new Method("VarAwareRef", new Experiment3.VarAwareMisVcm() {
+                new Method("VarAwareRef", new VarAwareMisVcm() {
                     MaxDepth = MaxDepth, NumIterations = Samples + TrainingSamples, MergePrimary = true,
                     RenderTechniquePyramid = true, EnableLightTracing = false,
                     EnableConnections = false, EnableNextEvent = false, EnableBsdfLightHit = false,

@@ -1,11 +1,31 @@
 using SeeSharp.Core;
 using SeeSharp.Integrators;
+using System;
 
 namespace MisForCorrelatedBidir.Common {
     public abstract class SceneConfig {
         public abstract Scene MakeScene();
         public abstract Integrator MakeReferenceIntegrator();
         public virtual int MaxDepth => 5;
+    }
+
+    public class LampCaustic : SceneConfig {
+        public override int MaxDepth => 10;
+        public override Integrator MakeReferenceIntegrator()
+        => new SeeSharp.Integrators.Bidir.VertexConnectionAndMerging() {
+            MaxDepth = MaxDepth, NumIterations = 10000, BaseSeedCamera = 971612, BaseSeedLight = 175037
+        };
+        public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/LampCaustic/LampCaustic.json");
+    }
+
+    public class LampCausticNoShade : SceneConfig {
+        public override int MaxDepth => 10;
+        public override Integrator MakeReferenceIntegrator()
+        => new SeeSharp.Integrators.Bidir.VertexConnectionAndMerging() {
+            MaxDepth = MaxDepth, NumIterations = 10000, BaseSeedCamera = 971612, BaseSeedLight = 175037
+        };
+        public override Scene MakeScene()
+        => Scene.LoadFromFile("../Scenes/LampCaustic/LampCausticNoShade.json");
     }
 
     public class ModernHall : SceneConfig {
@@ -48,7 +68,7 @@ namespace MisForCorrelatedBidir.Common {
         public override int MaxDepth => 10;
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.VertexConnectionAndMerging() {
-            MaxDepth = MaxDepth, NumIterations = 500,//5000,
+            MaxDepth = MaxDepth, NumIterations = 5000,
             BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
@@ -74,8 +94,14 @@ namespace MisForCorrelatedBidir.Common {
         public override int MaxDepth => 10;
         public override Integrator MakeReferenceIntegrator()
         => new Common.PdfRatioVcm() {
-            MaxDepth = MaxDepth, NumIterations = 1000,//10000,
-            BaseSeedCamera = 971612, BaseSeedLight = 175037
+            MaxDepth = MaxDepth, NumIterations = 10000,
+            BaseSeedCamera = 971612, BaseSeedLight = 175037,
+            RadiusInitializer = new RadiusInitCombined {
+                Candidates = new() {
+                    new RadiusInitFov { ScalingFactor = MathF.Pow(5 * MathF.PI / 180, 2) },
+                    new RadiusInitScene { ScalingFactor = 0.01f }
+                }
+            }
         };
 
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/RoughGlasses/RoughGlasses-Indirect.json");

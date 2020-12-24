@@ -2,18 +2,18 @@ import figuregen
 from figuregen import util
 import pyexr
 import os
-from pdf2image import convert_from_path
 import numpy as np
 import cv2
+from pdf2image import convert_from_path
 
 # Load images
 methods = [
-    ("a) Balance", "Vcm"),
-    ("b) [Jen19]", "JendersieFootprint"),
-    ("c) [GGSK19]", "VarAwareMisLive"),
-    ("d) \\textbf{Ours}", "PdfRatioCombined"),
-    # ("e) [GGSK19] long", "VarAwareMis"),
+    ("a) Balance", "BidirSplit"),
+    ("b) [PRDD15]", "UpperBound"),
+    ("c) [GGSK19]", "VarAware"),
+    ("d) \\textbf{Ours}", "PdfRatio"),
 ]
+
 
 def make_figure(scene_folder, cropA, cropB, filename, scene_name, exposure=0, show_method_names=True, times=None):
     method_images = [
@@ -77,13 +77,13 @@ def make_figure(scene_folder, cropA, cropB, filename, scene_name, exposure=0, sh
         crop_grid.get_element(0, col).set_image(tonemap(cropA.crop(method_images[col-1])))
         o = 1.5 if crop_errors_A[col-1] > 10 else 0
         crop_grid.get_element(0, col).set_label(error_string(col-1, crop_errors_A), "bottom_left",
-            width_mm=13.5 + o, height_mm=3, fontsize=7, offset_mm=[0.0,0.0], txt_padding_mm=0.2,
+            width_mm=13.5+o, height_mm=3, fontsize=7, offset_mm=[0.0,0.0], txt_padding_mm=0.2,
             bg_color=[40,40,40], txt_color=[255,255,255])
         # crop_grid.get_element(0, col).set_caption(error_string(col-1, crop_errors_A))
 
         crop_grid.get_element(1, col).set_image(tonemap(cropB.crop(method_images[col-1])))
         crop_grid.get_element(1, col).set_label(error_string(col-1, crop_errors_B), "bottom_left",
-            width_mm=13.5 + o, height_mm=3, fontsize=7, offset_mm=[0.0,0.0], txt_padding_mm=0.2,
+            width_mm=13.5, height_mm=3, fontsize=7, offset_mm=[0.0,0.0], txt_padding_mm=0.2,
             bg_color=[40,40,40], txt_color=[255,255,255])
         # crop_grid.get_element(1, col).set_caption(error_string(col-1, crop_errors_B))
 
@@ -129,6 +129,7 @@ def make_figure(scene_folder, cropA, cropB, filename, scene_name, exposure=0, sh
 
     width_cm = 17.7
     figuregen.horizontal_figure([ref_grid, crop_grid], width_cm, filename, tex_packages=["{dfadobe}"])
+
 
 def loadpdf(pdfname):
     images = convert_from_path(pdfname, dpi=1000)

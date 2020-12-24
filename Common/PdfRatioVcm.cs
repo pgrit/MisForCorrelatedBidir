@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Numerics;
 using SeeSharp.Integrators;
 using SeeSharp.Integrators.Bidir;
@@ -6,13 +7,12 @@ using SeeSharp.Integrators.Common;
 
 namespace MisForCorrelatedBidir.Common {
     public class PdfRatioVcm : VertexConnectionAndMerging {
-        public enum FootprintMode {
-            SceneSize,
-            Pixel,
-            CameraAngle
-        }
-        public FootprintMode Mode = FootprintMode.Pixel;
-        public float ScalingFactor = 50;
+        public RadiusInitializer RadiusInitializer;
+
+        /// <summary>
+        /// If set to true, disables our method and instead sets the number of samples n=1 for merges.
+        /// Do not use! (except to verify that this makes no sense)
+        /// </summary>
         public bool UseUpperBound = false;
 
         public readonly ref struct PdfRatio {
@@ -22,23 +22,19 @@ namespace MisForCorrelatedBidir.Common {
             readonly int numPaths;
             public PdfRatio(BidirPathPdfs pdfs, float radius, int numPaths, PdfRatioVcm parent,
                             float distToCam) {
-                switch (parent.Mode) {
-                    case FootprintMode.SceneSize:
-                        radius = parent.scene.Radius * parent.scene.Radius * parent.ScalingFactor;
-                        break;
-
-                    case FootprintMode.Pixel:
-                        float pixelRadius = 1 / MathF.Sqrt(pdfs.PdfsCameraToLight[0] * MathF.PI);
-                        radius = pixelRadius * parent.ScalingFactor;
-                        break;
-
-                    case FootprintMode.CameraAngle:
-                        radius = distToCam * distToCam * parent.ScalingFactor;
-                        break;
-                }
-
                 this.numPaths = numPaths;
                 this.parent = parent;
+
+                if (parent.RadiusInitializer == null) {
+                    Debug.Assert(parent.UseUpperBound);
+                    cameraToLight = null;
+                    lightToCamera = null;
+                    return;
+                }
+
+                radius = parent.RadiusInitializer.ComputeRadius(parent.scene.Radius,
+                    pdfs.PdfsCameraToLight[0], distToCam);
+
                 int numSurfaceVertices = pdfs.PdfsCameraToLight.Length - 1;
                 cameraToLight = new float[numSurfaceVertices];
                 lightToCamera = new float[numSurfaceVertices];
