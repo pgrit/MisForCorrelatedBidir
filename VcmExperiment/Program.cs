@@ -24,11 +24,14 @@ namespace MisForCorrelatedBidir.VcmExperiment {
         }
 
         static void RunFovExperiment() {
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+
             float[] resolutions = new[] {
                 0.25f,
                 1.0f,
                 3.0f,
             };
+
             foreach (float resolutionScale in resolutions) {
                 string suffix = $"-{resolutionScale:0.000}";
 
@@ -49,7 +52,6 @@ namespace MisForCorrelatedBidir.VcmExperiment {
         }
 
         static void Main(string[] args) {
-            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
             RunBench();
             // RunFovExperiment();
         }

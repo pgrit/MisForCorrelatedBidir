@@ -40,7 +40,7 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                 new Method("PdfRatioFov", new PdfRatioVcm() {
                     MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
-                    RadiusInitializer = new RadiusInitFov { ScalingFactor = MathF.Pow(5 * MathF.PI / 180, 2) }
+                    RadiusInitializer = new RadiusInitFov { ScalingFactor = MathF.Tan(1 * MathF.PI / 180) }
                 }),
                 new Method("PdfRatioScene", new PdfRatioVcm() {
                     MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
@@ -57,8 +57,8 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                     RenderTechniquePyramid = false,
                     RadiusInitializer = new RadiusInitCombined {
                         Candidates = new() {
-                            new RadiusInitFov { ScalingFactor = MathF.Pow(10 * MathF.PI / 180, 2) },
-                            new RadiusInitScene { ScalingFactor = 0.01f }
+                            new RadiusInitFov { ScalingFactor = MathF.Tan(1 * MathF.PI / 180) },
+                            new RadiusInitScene { ScalingFactor = 0.02f }
                         }
                     }
                 }),

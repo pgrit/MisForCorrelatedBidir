@@ -9,7 +9,7 @@ namespace MisForCorrelatedBidir.Common {
     public class RadiusInitScene : RadiusInitializer {
         public float ScalingFactor;
         public override float ComputeRadius(float sceneRadius, float primaryPdf, float primaryDistance)
-        => sceneRadius * sceneRadius * ScalingFactor;
+        => sceneRadius * ScalingFactor;
     }
 
     public class RadiusInitPixel : RadiusInitializer {
@@ -21,7 +21,7 @@ namespace MisForCorrelatedBidir.Common {
     public class RadiusInitFov : RadiusInitializer {
         public float ScalingFactor;
         public override float ComputeRadius(float sceneRadius, float primaryPdf, float primaryDistance)
-        => primaryDistance * primaryDistance * ScalingFactor;
+        => primaryDistance * ScalingFactor;
     }
 
     public class RadiusInitCombined : RadiusInitializer {
