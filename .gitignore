@@ -13,7 +13,10 @@ Properties
 
 # redering results
 */Results/*/**
+*/Results-*/*/**
+*/Results-*/*.pdf
 */Results/*.pdf
+*/Results-*/*.png
 */Results/*.png
 !Webpage/Results/Vcm/index.html
 !Webpage/Results/BidirSplit/index.html

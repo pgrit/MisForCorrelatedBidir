@@ -4,9 +4,9 @@ using MisForCorrelatedBidir.Common;
 
 namespace MisForCorrelatedBidir.BidirExperiment {
     class Program {
-        static void Main(string[] args) {
+
+        static void RunBench(int splitfactor) {
             int resolutionScale = 2;
-            int splitfactor = 64;
             var bench = new Benchmark(new Dictionary<string, SeeSharp.Experiments.ExperimentFactory>(){
                 {"ModernHall", new BidirExperiment(new ModernHall()){
                     SplitFactor = splitfactor
@@ -38,8 +38,14 @@ namespace MisForCorrelatedBidir.BidirExperiment {
                 {"LampCaustic", new BidirExperiment(new LampCaustic()){
                     SplitFactor = splitfactor
                 }},
-            }, 640 * resolutionScale, 480 * resolutionScale);
+            }, 640 * resolutionScale, 480 * resolutionScale) { DirectoryName = $"Results-x{splitfactor}" };
             bench.Run(forceReference: false);
+        }
+
+        static void Main(string[] args) {
+            RunBench(10);
+            RunBench(50);
+            RunBench(100);
         }
     }
 }
