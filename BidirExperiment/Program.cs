@@ -35,6 +35,9 @@ namespace MisForCorrelatedBidir.BidirExperiment {
                 {"MinimalistWhiteRoom", new BidirExperiment(new MinimalistWhiteRoom()){
                     SplitFactor = splitfactor
                 }},
+                {"LampCaustic", new BidirExperiment(new LampCaustic()){
+                    SplitFactor = splitfactor
+                }},
             }, 640 * resolutionScale, 480 * resolutionScale);
             bench.Run(forceReference: false);
         }
