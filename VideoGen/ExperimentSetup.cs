@@ -26,12 +26,7 @@ namespace MisForCorrelatedBidir.VideoGen {
                     MaxDepth = MaxDepth, NumIterations = Samples, MergePrimary = true,
                     RenderTechniquePyramid = true, EnableLightTracing = false,
                     EnableConnections = false, EnableNextEvent = false, EnableBsdfLightHit = false,
-                    RadiusInitializer = new RadiusInitCombined {
-                        Candidates = new() {
-                            new RadiusInitFov { ScalingFactor = MathF.Pow(5 * MathF.PI / 180, 2) },
-                            new RadiusInitScene { ScalingFactor = 0.01f }
-                        }
-                    }
+                    RadiusInitializer = new RadiusInitFov { ScalingFactor = MathF.Tan(MathF.PI / 180) }
                 }),
                 new Method("VarAwareRef", new VarAwareMisVcm() {
                     MaxDepth = MaxDepth, NumIterations = Samples + TrainingSamples, MergePrimary = true,
