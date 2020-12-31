@@ -19,6 +19,8 @@ Properties
 */Results-*/*.png
 */Results/*.png
 !Webpage/Results/Vcm/index.html
-!Webpage/Results/BidirSplit/index.html
+!Webpage/Results/BidirSplit*/index.html
 
+# generated figures
 Teaser.pdf
+VideoGen/Figure3/*

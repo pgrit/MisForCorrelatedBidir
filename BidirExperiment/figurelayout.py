@@ -14,8 +14,7 @@ methods = [
     ("d) \\textbf{Ours}", "PdfRatio"),
 ]
 
-
-def make_figure(scene_folder, cropA, cropB, filename, scene_name, exposure=0, show_method_names=True, times=None):
+def make_figure(scene_folder, cropA, cropB, scene_name, exposure=0, show_method_names=True, times=None):
     method_images = [
         pyexr.read(os.path.join(scene_folder, folder, "render.exr"))
         for _, folder in methods
@@ -127,14 +126,6 @@ def make_figure(scene_folder, cropA, cropB, filename, scene_name, exposure=0, sh
         ref_grid.get_layout().set_col_titles("top", fontsize=8, field_size_mm=2.8, offset_mm=0.25)
     ref_grid.get_layout().set_col_titles("bottom", fontsize=8, field_size_mm=2.8, offset_mm=0.5)
 
-    width_cm = 17.7
-    figuregen.horizontal_figure([ref_grid, crop_grid], width_cm, filename, tex_packages=["{dfadobe}"])
+    return [ref_grid, crop_grid]
 
 
-def loadpdf(pdfname):
-    images = convert_from_path(pdfname, dpi=1000)
-    return np.array(images[0])
-
-def convert(pdfname):
-    img = loadpdf(pdfname)
-    cv2.imwrite(pdfname.replace('.pdf', '.png'), cv2.cvtColor(img, cv2.COLOR_RGB2BGR))

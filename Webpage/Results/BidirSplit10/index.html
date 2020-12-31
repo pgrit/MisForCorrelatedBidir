@@ -1,0 +1,100 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="../../style.css">
+  <script src="../../comparison.js"></script>
+
+  <script>
+    function changeScene(event) {
+      event.preventDefault();
+      var scene = event.target.innerHTML;
+
+      var x = document.getElementsByClassName("method-image");
+      for (let item of x) {
+        let method = item.src.split("/").slice(-1)[0];
+        item.src = scene + "/" + method;
+      }
+
+      document.getElementsByClassName("active")[0].classList.remove("active");
+      event.target.classList.add("active")
+    }
+  </script>
+</head>
+
+<body>
+  <div class="navigation">
+    <a class="navigation-button" href="../../index.html">Home</a>
+    <a class="navigation-button" href="../Vcm/index.html">Vcm results</a>
+    <a class="navigation-button-this" href="../BidirSplit10/index.html">BDPT splitting results (x10)</a>
+    <a class="navigation-button" href="../BidirSplit50/index.html">BDPT splitting results (x50)</a>
+    <a class="navigation-button" href="../BidirSplit100/index.html">BDPT splitting results (x100)</a>
+  </div>
+
+  <div class="sidebar">
+    <p><a class="sidebar-link active" href="." onclick="changeScene(event)">IndirectRoom</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">ContemporaryBathroom</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">HomeOffice</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">BananaRange</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">LivingRoom</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">MinimalistWhiteRoom</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">ModernHall</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">RoughGlasses</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">RoughGlassesIndirect</a></p>
+    <p><a class="sidebar-link" href="." onclick="changeScene(event)">LampCaustic</a></p>
+  </div>
+
+  <div class="image-list">
+    <div class="image-container">
+      <img class="method-image" src="IndirectRoom/Balance.png" width="160" height="120">
+      <p class="image-label">Balance heuristic</p>
+    </div>
+    <div class="image-container">
+      <img class="method-image" src="IndirectRoom/Ours.png" width="160" height="120">
+      <p class="image-label">Ours</p>
+    </div>
+    <div class="image-container">
+      <img class="method-image" src="IndirectRoom/PathTracer.png" width="160" height="120">
+      <p class="image-label">Path tracer</p>
+    </div>
+    <div class="image-container">
+      <img class="method-image" src="IndirectRoom/BDPT.png" width="160" height="120">
+      <p class="image-label">BDPT</p>
+    </div>
+    <div class="image-container">
+      <img class="method-image" src="IndirectRoom/GrittmannEtAl.png" width="160" height="120">
+      <p class="image-label">Variance-aware</p>
+    </div>
+    <div class="image-container">
+      <img class="method-image" src="IndirectRoom/PopovEtAl.png" width="160" height="120">
+      <p class="image-label">Popov et al.</p>
+    </div>
+    <div class="image-container">
+      <img class="method-image" src="IndirectRoom/reference.png" width="160" height="120">
+      <p class="image-label">Reference</p>
+    </div>
+  </div>
+
+  <div class="main">
+    <div style="padding-top: 0px;">
+      <p>You can drag images from the list on the left into the comparison field below.</p>
+    </div>
+
+    <div class="img-comp-container" style="height: 750px;">
+      <div class="img-comp-img" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <p class="img-comp-label-right">Balance</p>
+        <img class="method-image" src="IndirectRoom/Balance.png" width="960" height="720">
+      </div>
+      <div class="img-comp-img img-comp-overlay" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <p class="img-comp-label-left">Ours</p>
+        <img class="method-image" src="IndirectRoom/Ours.png" width="960" height="720">
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    initComparisons();
+  </script>
+</body>
+
+</html>

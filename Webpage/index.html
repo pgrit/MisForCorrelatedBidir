@@ -54,7 +54,9 @@
   <div class="navigation">
     <a class="navigation-button-this" href="./index.html">Home</a>
     <a class="navigation-button" href="./Results/Vcm/index.html">Vcm results</a>
-    <a class="navigation-button" href="./Results/BidirSplit/index.html">BDPT splitting results</a>
+    <a class="navigation-button" href="./Results/BidirSplit10/index.html">BDPT splitting results (x10)</a>
+    <a class="navigation-button" href="./Results/BidirSplit50/index.html">BDPT splitting results (x50)</a>
+    <a class="navigation-button" href="./Results/BidirSplit100/index.html">BDPT splitting results (x100)</a>
   </div>
 
   <div class="main">
@@ -76,10 +78,14 @@
     </video>
 
     <h4>Additional figures for VCM test scenes</h4>
-    <iframe src="./Results/Vcm/additionalfigures.pdf" width="1000" height="1000"></iframe>
+    <iframe src="./Results/Vcm/VcmOther.pdf" width="1000" height="1000"></iframe>
 
-    <h4>Additional figures for BDPT test scenes</h4>
-    <iframe src="./Results/BidirSplit/additionalfigures.pdf" width="1000" height="1000"></iframe>
+    <h4>Additional figures for BDPT test scenes (10 shadow rays)</h4>
+    <iframe src="./Results/BidirSplit10/BidirOther.pdf" width="1000" height="1000"></iframe>
+    <h4>Additional figures for BDPT test scenes (50 shadow rays)</h4>
+    <iframe src="./Results/BidirSplit50/BidirOther.pdf" width="1000" height="1000"></iframe>
+    <h4>Additional figures for BDPT test scenes (100 shadow rays)</h4>
+    <iframe src="./Results/BidirSplit100/BidirOther.pdf" width="1000" height="1000"></iframe>
 
     <p> Running the experiments yourself requires the following: </p>
 
@@ -92,7 +98,7 @@
 
     <p>
       The nasty bit is getting SeeSharp/SeeCore, the wrapper around the C++ dependencies, to compile using CMake. Then, you also need to add SeeSharp/dist to the linker search path. For Linux users, there is a handy script in `SeeSharp/setup_env.sh`. Windows users can simply add `SeeSharp/dist` to the PATH.
-      From there on out, it should be smooth sailing. Simply run: `cd Experiments/Vcm && dotnet run -c Release`.
+      From there on out, it should be smooth sailing. Simply run: `cd VcmExperiment && dotnet run -c Release`.
     </p>
   </div>
 </body>

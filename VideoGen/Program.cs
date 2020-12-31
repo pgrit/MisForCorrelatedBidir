@@ -1,5 +1,6 @@
 ﻿using SeeSharp.Experiments;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace MisForCorrelatedBidir.VideoGen {
     class Program {
@@ -13,7 +14,10 @@ namespace MisForCorrelatedBidir.VideoGen {
                 bench.Experiments.Add(name, new Frame(frame));
             }
 
-            bench.Run(forceReference: false);
+            bench.Run(forceReference: true);
+
+            Process.Start("python", "./MakeVideoFrames.py");
+            Process.Start("python", "./Figure3.py");
         }
     }
 }
