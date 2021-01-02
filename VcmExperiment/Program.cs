@@ -51,8 +51,27 @@ namespace MisForCorrelatedBidir.VcmExperiment {
             }
         }
 
+        static void RunRadiusExperiment() {
+            float resolutionScale = 2.0f;
+            Benchmark bench = new(new Dictionary<string, SeeSharp.Experiments.ExperimentFactory>(){
+                // {"ModernHall", new RadiusExperiment(new ModernHall()) },
+                // {"BananaRange", new RadiusExperiment(new BananaRange()) },
+                // {"ContemporaryBathroom", new RadiusExperiment(new ContemporaryBathroom()) },
+                // {"HomeOffice", new RadiusExperiment(new HomeOffice()) },
+                // {"RoughGlasses", new RadiusExperiment(new RoughGlasses()) },
+                // {"RoughGlassesIndirect", new RadiusExperiment(new RoughGlassesIndirect()) },
+                // {"IndirectRoom", new RadiusExperiment(new IndirectRoom()) },
+                // {"LivingRoom", new RadiusExperiment(new LivingRoom()) },
+                // {"MinimalistWhiteRoom", new RadiusExperiment(new MinimalistWhiteRoom()) },
+                // {"LampCausticNoShade", new RadiusExperiment(new LampCausticNoShade()) },
+                // {"LampCaustic", new RadiusExperiment(new LampCaustic()) },
+            }, (int)(640 * resolutionScale), (int)(480 * resolutionScale));
+            bench.Run(forceReference: false);
+        }
+
         static void Main(string[] args) {
             RunBench();
+            // RunRadiusExperiment();
             // RunFovExperiment();
         }
     }
