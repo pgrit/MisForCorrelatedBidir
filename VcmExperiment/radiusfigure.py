@@ -14,8 +14,8 @@ scene_configs = [
     #     "exposure": 1,
     # },
     {
-        "scene_folder": "Results/BananaRange",
-        "scene_name": "\\textsc{Banana Range}",
+        "scene_folder": "Results/TargetPractice",
+        "scene_name": "\\textsc{Target Practice}",
         "crop": util.image.Cropbox(40, 1000, crop_height, crop_width, 10),
         "exposure": 1.5,
     },
@@ -72,7 +72,7 @@ scene_configs = [
 methods = [
     ("$0.01r$", "Radius-x001"),
     ("$0.1r$", "Radius-x01"),
-    ("$0.5r$", "Radius-x05"),
+    # ("$0.5r$", "Radius-x05"),
     ("$r$", "PdfRatioFov"),
     ("$2r$", "Radius-x2"),
     ("$10r$", "Radius-x10"),

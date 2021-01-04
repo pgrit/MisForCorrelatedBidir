@@ -24,16 +24,16 @@ paper_figures = [
 ]
 
 additional_figures = [
-    make_figure("Results/BananaRange",
+    make_figure("Results/TargetPractice",
         util.image.Cropbox(top=20*2, left=370*2, width=64*2, height=48*2, scale=10),
         util.image.Cropbox(top=400*2, left=530*2, width=64*2, height=48*2, scale=10),
-        "\\textsc{Banana Range}", exposure=1.5, show_method_names=True,
+        "\\textsc{Target Practice}", exposure=1.5, show_method_names=True,
         times=["33s", "33s", "45s", "33s", "220s"]),
 
     make_figure("Results/LivingRoom",
         util.image.Cropbox(top=90*2, left=570*2, width=64*2, height=48*2, scale=10),
         util.image.Cropbox(top=300*2, left=330*2, width=64*2, height=48*2, scale=10),
-        "\\textsc{Livingroom}", exposure=0, show_method_names=True,
+        "\\textsc{Living Room}", exposure=0, show_method_names=True,
         times=["270s", "270s", "890s", "270s", "1800s"]),
 
     make_figure("Results/ModernHall",

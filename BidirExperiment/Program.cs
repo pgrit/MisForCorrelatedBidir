@@ -14,7 +14,7 @@ namespace MisForCorrelatedBidir.BidirExperiment {
                 {"LivingRoom", new BidirExperiment(new LivingRoom()){
                     SplitFactor = splitfactor
                 }},
-                {"BananaRange", new BidirExperiment(new BananaRange()){
+                {"TargetPractice", new BidirExperiment(new TargetPractice()){
                     SplitFactor = splitfactor
                 }},
                 {"ContemporaryBathroom", new BidirExperiment(new ContemporaryBathroom()){

@@ -25,10 +25,10 @@ def make(variant):
             "\\textsc{Minimalist White Room}", exposure=1,
             times=["75s", "75s", "85s", "75s"]),
 
-        make_figure(f"{variant}/BananaRange",
+        make_figure(f"{variant}/TargetPractice",
             util.image.Cropbox(top=20*2, left=370*2, width=64*2, height=48*2, scale=10),
             util.image.Cropbox(top=400*2, left=530*2, width=64*2, height=48*2, scale=10),
-            "\\textsc{Banana Range}", exposure=1,
+            "\\textsc{Target Practice}", exposure=1,
             times=["260s", "260s", "280s", "260s"]),
 
         make_figure(f"{variant}/ContemporaryBathroom",

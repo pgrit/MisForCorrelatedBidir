@@ -5,7 +5,7 @@ import os
 from figuregen.util.image import lin_to_srgb
 
 scenes = {
-    "BananaRange",
+    "TargetPractice",
     "ContemporaryBathroom",
     "HomeOffice",
     "IndirectRoom",

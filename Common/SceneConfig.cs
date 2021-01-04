@@ -37,13 +37,13 @@ namespace MisForCorrelatedBidir.Common {
         public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/ModernHall/ModernHall.json");
     }
 
-    public class BananaRange : SceneConfig {
+    public class TargetPractice : SceneConfig {
         public override Integrator MakeReferenceIntegrator()
         => new SeeSharp.Integrators.Bidir.ClassicBidir() {
             MaxDepth = MaxDepth, NumIterations = 512, BaseSeedCamera = 971612, BaseSeedLight = 175037
         };
 
-        public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/BananaRange/banana_range.json");
+        public override Scene MakeScene() => Scene.LoadFromFile("../Scenes/TargetPractice/target_practice.json");
     }
 
     public class ContemporaryBathroom : SceneConfig {
