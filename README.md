@@ -60,7 +60,7 @@ The source code, but NOT the figures and test scenes, is released under the same
 Copyright of the test scenes:
 
 - The ContemporaryBathroom, ModernHall, MinimalistWhiteRoom were shared by Wig42 on Blend Swap (CC-BY)
-- The BananaRange was modelled by Vladislav Hnatovskiy and Mira Niemann (TODO)
+- The BananaRange was modelled by Vladislav Hnatovskiy and Mira Niemann (CC-BY), license info on the textures can be found in the `Scenes/BananaRange/License.md` file.
 - The LivingRoom TODO (TODO)
 - The other test scenes were modelled by Pascal Grittmann (CC-0)
 
