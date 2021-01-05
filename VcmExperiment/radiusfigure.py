@@ -7,61 +7,31 @@ scene_configs = [
     {
         "scene_folder": "Results/ModernHall",
         "scene_name": "\\textsc{Modern Hall}",
-        "crop": util.image.Cropbox(60, 400, crop_height, crop_width, 10),
         "exposure": 1,
     },
     {
         "scene_folder": "Results/TargetPractice",
         "scene_name": "\\textsc{Target Practice}",
-        "crop": util.image.Cropbox(40, 1000, crop_height, crop_width, 10),
         "exposure": 1.5,
     },
     {
         "scene_folder": "Results/HomeOffice",
         "scene_name": "\\textsc{Home Office}",
-        "crop": util.image.Cropbox(160, 1140, crop_height, crop_width, 10),
         "exposure": 1,
     },
     {
         "scene_folder": "Results/MinimalistWhiteRoom",
         "scene_name": "\\textsc{Minimalist Room}",
-        "crop": util.image.Cropbox(30, 30, crop_height, crop_width, 10),
         "exposure": 2,
     },
     {
         "scene_folder": "Results/IndirectRoom",
         "scene_name": "\\textsc{Indirect Room}",
-        "crop": util.image.Cropbox(300, 45, crop_height, crop_width, 10),
         "exposure": -0.5,
     },
-    # {
-    #     "scene_folder": "Results/LampCaustic",
-    #     "scene_name": "LampCaustic",
-    #     "crop": util.image.Cropbox(30, 30, crop_height, crop_width, 10),
-    #     "exposure": -0.5,
-    # },
-    # {
-    #     "scene_folder": "Results/LampCausticNoShade",
-    #     "scene_name": "LampCausticNoShade",
-    #     "crop": util.image.Cropbox(30, 30, crop_height, crop_width, 10),
-    #     "exposure": 0,
-    # },
-    # {
-    #     "scene_folder": "Results/LivingRoom",
-    #     "scene_name": "LivingRoom",
-    #     "crop": util.image.Cropbox(30, 30, crop_height, crop_width, 10),
-    #     "exposure": 0,
-    # },
-    # {
-    #     "scene_folder": "Results/RoughGlasses",
-    #     "scene_name": "RoughGlasses",
-    #     "crop": util.image.Cropbox(30, 30, crop_height, crop_width, 10),
-    #     "exposure": 0,
-    # },
     {
         "scene_folder": "Results/RoughGlassesIndirect",
         "scene_name": "\\textsc{Rough Glasses}",
-        "crop": util.image.Cropbox(460, 320, crop_height, crop_width, 10),
         "exposure": 2,
     }
 ]
