@@ -63,8 +63,10 @@ def make(variant):
     ]
 
     width_cm = 17.7
-    figuregen.figure(paper_figures, width_cm, f"{variant}/BidirFigure.pdf", tex_packages=["{dfadobe}"])
-    figuregen.figure(additional_figures, width_cm, f"{variant}/BidirOther.pdf", tex_packages=["{dfadobe}"])
+    figuregen.figure(paper_figures, width_cm, f"{variant}/BidirFigure.pdf",
+        tex_packages=["{dfadobe}", "{contour}", "{color}"])
+    figuregen.figure(additional_figures, width_cm, f"{variant}/BidirOther.pdf",
+        tex_packages=["{dfadobe}", "{contour}", "{color}"])
 
 make("Results-x10")
 make("Results-x50")

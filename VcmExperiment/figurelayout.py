@@ -60,54 +60,61 @@ def make_figure(scene_folder, cropA, cropB, scene_name, exposure=0, show_method_
     def error_string(index, array, include_time=False):
         value = f"${array[index]:.2f}$ "
         if index == 0:
-            speedup = "($1.00\\times$)"
+            speedup = "$(1.00\\times)$"
         elif index == 3:
-            speedup = "\\textbf{" + f"($\\mathbf{{ {array[index]/array[0]:.2f}\\times }}$)" + "}"
+            speedup = "\\textbf{" + f"$(\\mathbf{{ {array[index]/array[0]:.2f}\\times }})$" + "}"
         else:
-            speedup = f"(${array[index]/array[0]:.2f}\\times$)"
+            speedup = f"$({array[index]/array[0]:.2f}\\times)$"
 
         if times is not None and include_time:
             speedup += ", " + times[index]
 
-        return "\\textsf{" + value + speedup + "}"
+        return value + speedup
+
+    # Compute outline color from dominant color of the reference
+    outline_clr = [10,10,10]
+    def make_contour(org):
+        res = "\\definecolor{CharFillColor}{RGB}{250,250,250}"
+        res += "\\definecolor{CharStrokeColor}{RGB}{"
+        res += f"{outline_clr[0]},{outline_clr[1]},{outline_clr[2]}"
+        res += "}"
+        res += "\\contourlength{0.75pt} \\contournumber{40}" + "\\contour{CharStrokeColor}"
+        res += "{\\textcolor{CharFillColor}{"+ org + "}}"
+        return res
+
+    label_params = {
+        "width_mm": 20,
+        "height_mm": 4,
+        "fontsize": 8,
+        "offset_mm": [0, 0],
+        "txt_padding_mm": 1,
+        "bg_color": None,
+        "txt_color": [255,255,255],
+        "pos": "bottom_center"
+    }
 
     # Comparison grid
     crop_grid = figuregen.Grid(num_cols=len(methods) + 1, num_rows=2)
     for col in range(1, len(methods)+1):
         crop_grid.get_element(0, col).set_image(tonemap(cropA.crop(method_images[col-1])))
-        o = 1.5 if crop_errors_A[col-1] > 10 else 0
-        crop_grid.get_element(0, col).set_label(error_string(col-1, crop_errors_A), "bottom_left",
-            width_mm=13.5 + o, height_mm=3, fontsize=7, offset_mm=[0.0,0.0], txt_padding_mm=0.2,
-            bg_color=[40,40,40], txt_color=[255,255,255])
-        # crop_grid.get_element(0, col).set_caption(error_string(col-1, crop_errors_A))
+        crop_grid.get_element(0, col).set_label(make_contour(error_string(col-1, crop_errors_A)),
+            **label_params)
 
         crop_grid.get_element(1, col).set_image(tonemap(cropB.crop(method_images[col-1])))
-        crop_grid.get_element(1, col).set_label(error_string(col-1, crop_errors_B), "bottom_left",
-            width_mm=13.5 + o, height_mm=3, fontsize=7, offset_mm=[0.0,0.0], txt_padding_mm=0.2,
-            bg_color=[40,40,40], txt_color=[255,255,255])
-        # crop_grid.get_element(1, col).set_caption(error_string(col-1, crop_errors_B))
+        crop_grid.get_element(1, col).set_label(make_contour(error_string(col-1, crop_errors_B)),
+            **label_params)
 
     crop_grid.get_element(0, 0).set_image(tonemap(cropA.crop(reference_image)))
-    crop_grid.get_element(0, 0).set_label("\\textsf{" + f"{error_metric_name} (crop)" + "}", "bottom_left",
-            width_mm=14, height_mm=3, fontsize=7, offset_mm=[0.0,0.0], txt_padding_mm=0.2,
-            bg_color=[40,40,40], txt_color=[255,255,255])
-    # crop_grid.get_element(0, 0).set_caption(f"{error_metric_name} (crop)")
+    crop_grid.get_element(0, 0).set_label(make_contour(f"{error_metric_name} (crop)"), **label_params)
 
     crop_grid.get_element(1, 0).set_image(tonemap(cropB.crop(reference_image)))
-    crop_grid.get_element(1, 0).set_label("\\textsf{" + f"{error_metric_name} (crop)" + "}", "bottom_left",
-            width_mm=14, height_mm=3, fontsize=7, offset_mm=[0.0,0.0], txt_padding_mm=0.2,
-            bg_color=[40,40,40], txt_color=[255,255,255])
-    # crop_grid.get_element(1, 0).set_caption(f"{error_metric_name} (crop)")
+    crop_grid.get_element(1, 0).set_label(make_contour(f"{error_metric_name} (crop)"), **label_params)
 
     # Column titles
-    names = ["\\textsf{" + "Reference" + "}"]
-    names.extend([ "\\textsf{" + methods[i][0] + "}" for i in range(len(methods))])
+    names = ["Reference"]
+    names.extend([ methods[i][0] for i in range(len(methods))])
 
-    error_strings = ["\\textsf{"
-        + f"{error_metric_name}"
-        + (", time" if times is not None else "")
-        + "}"
-    ]
+    error_strings = [ f"{error_metric_name}" + (", time" if times is not None else "") ]
     error_strings.extend([ error_string(i, errors, True) for i in range(len(methods)) ])
 
     if show_method_names:
@@ -119,7 +126,6 @@ def make_figure(scene_folder, cropA, cropB, scene_name, exposure=0, show_method_
     if show_method_names:
         crop_grid.get_layout().set_col_titles("top", fontsize=8, field_size_mm=2.8, offset_mm=0.25)
     crop_grid.get_layout().set_col_titles("bottom", fontsize=8, field_size_mm=2.8, offset_mm=0.5)
-    # crop_grid.get_layout().set_caption(height_mm=3, fontsize=8, offset_mm=0.25)
 
     # Reference layout
     ref_grid.get_layout().set_padding(right=1, bottom=0)
