@@ -102,16 +102,16 @@ def make_figure(frame: FrameData, filename, title=True):
 
     renderings = figuregen.Grid(1,3)
     if title:
-        renderings.set_title("top", "\\textsf{c) Renderings}")
+        renderings.set_title("top", "c) Renderings")
         renderings.set_col_titles("top", [
-            f'\\textsf{{{frame.methods[0][0]}}}',
-            f'\\textsf{{{frame.methods[1][0]}}}',
-            f'\\textsf{{{frame.methods[2][0]}}}',
+            f'{frame.methods[0][0]}',
+            f'{frame.methods[1][0]}',
+            f'{frame.methods[2][0]}',
         ])
     renderings.set_col_titles("bottom", [
-        f"\\textsf{{${frame.errors[0]:.3f}$}}",
-        f"\\textsf{{${frame.errors[1]:.3f}$}}",
-        f"\\textsf{{${frame.errors[2]:.3f}$}}",
+        f"${frame.errors[0]:.3f}$",
+        f"${frame.errors[1]:.3f}$",
+        f"${frame.errors[2]:.3f}$",
     ])
     left = renderings.get_element(0, 0)
     left.set_image(util.image.lin_to_srgb(left_crop.crop(frame.method_images[0])))
@@ -124,11 +124,11 @@ def make_figure(frame: FrameData, filename, title=True):
 
     if title:
         weights.set_col_titles("top", [
-            f"\\textsf{{{frame.methods[0][0]}}}",
-            f"\\textsf{{{frame.methods[1][0]}}}",
-            f"\\textsf{{{frame.methods[2][0]}}}"
+            f"{frame.methods[0][0]}",
+            f"{frame.methods[1][0]}",
+            f"{frame.methods[2][0]}"
         ])
-        weights.set_title("top", r"\textsf{d) MIS weights}")
+        weights.set_title("top", r"d) MIS weights")
 
     # Compare the first merge
     left = weights.get_element(0, 0)
@@ -150,9 +150,9 @@ def make_figure(frame: FrameData, filename, title=True):
     right.set_image(colormap(right_crop.crop(w)))
 
     weights.set_col_titles("bottom", [
-        f"\\textsf{{avg.: ${m1:.2f}$}}",
-        f"\\textsf{{${m2:.2f}$}}",
-        f"\\textsf{{${m3:.2f}$}}"
+        f"avg.: ${m1:.2f}$",
+        f"${m2:.2f}$",
+        f"${m3:.2f}$"
     ])
 
     cbar = figuregen.Grid(1, 1)
@@ -178,21 +178,21 @@ def make_figure(frame: FrameData, filename, title=True):
     ]
 
     techs_grid.set_col_titles("bottom", [
-        f"\\textsf{{relMSE: ${tech_error[0]:.2f}$}}",
-        f"\\textsf{{${tech_error[1]:.2f} \\,({tech_error[1]/tech_error[0]:.2f}\\times)$}}",
+        f"relMSE: ${tech_error[0]:.2f}$",
+        f"${tech_error[1]:.2f} \\,({tech_error[1]/tech_error[0]:.2f}\\times)$",
     ])
 
     if title:
         techs_grid.set_col_titles("top", [
-            r"\textsf{Merge at $\mathbf{x}_1$}", r"\textsf{Merge at $\mathbf{x}_2$}"
+            r"Merge at $\mathbf{x}_1$", r"Merge at $\mathbf{x}_2$"
         ])
-        techs_grid.set_title("top", "\\textsf{b) Individual techniques}")
+        techs_grid.set_title("top", "b) Individual techniques")
 
     # placeholder for illustrations
     placeholder = figuregen.Grid(1,1)
     placeholder.get_element(0, 0).set_image(util.image.lin_to_srgb(np.tile(np.array([1,1,1]), (7,2))))
     if title:
-        placeholder.set_title("top", "\\textsf{a) Layout}")
+        placeholder.set_title("top", "a) Layout")
 
     # Define and align the layout
     renderings.get_layout().set_col_titles("bottom", 2.8, offset_mm=0.5, fontsize=8)

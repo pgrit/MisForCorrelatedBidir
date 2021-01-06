@@ -102,7 +102,7 @@ def make_plot():
         e.set_caption(scene_configs[i]["scene_name"])
         e.set_frame(3, colors[i])
     l = reference_grid.get_layout()
-    l.set_caption(2.8, fontsize=7)
+    l.set_caption(2.8, fontsize=8, offset_mm=0.5)
     l.set_padding(left=1)
 
     figuregen.figure([[plot_module, reference_grid]], 17.7, "Results/RadiusFigure.pdf",
