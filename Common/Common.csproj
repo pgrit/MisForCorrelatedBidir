@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SeeSharp\src\SeeSharp\Experiments\Experiments.csproj" />
+    <ProjectReference Include="..\..\SeeSharp\SeeSharp\SeeSharp.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

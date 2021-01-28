@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Numerics;
+using TinyEmbree;
 using SeeSharp.Core;
 using SeeSharp.Core.Geometry;
 using SeeSharp.Core.Image;
