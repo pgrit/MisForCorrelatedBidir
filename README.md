@@ -1,8 +1,8 @@
-﻿# Correlated MIS for bidirectional rendering algorithms
+﻿# Correlation-Aware MIS for Bidirectional Rendering Algorithms
 
 ![](Teaser.png)
 
-Implementation of the Eurographics 2021 Paper "Correlated Multiple Importance Sampling for Bidirectional Algorithms" by Pascal Grittmann, Iliyan Georgiev, and Philipp Slusallek.
+Implementation of the Eurographics 2021 Paper "Correlation-Aware Multiple Importance Sampling for Bidirectional Rendering Algorithms" by Pascal Grittmann, Iliyan Georgiev, and Philipp Slusallek.
 
 This is the original codebase used to generate all results and figures in the paper and its supplemental.
 
