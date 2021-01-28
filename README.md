@@ -22,7 +22,7 @@ Clone the SeeSharp repository next to this one. The project files assume that ru
 
 ### Figuregen (optional)
 
-The figures where generated with figuregen version 0.6.1. You can install that exact version via pip:
+The figures where generated with [figuregen](https://github.com/Mira-13/figure-gen) version 0.6.1. You can install that exact version via pip:
 
 ```
 python -m pip install figuregen==0.6.1
