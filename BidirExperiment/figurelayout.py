@@ -3,8 +3,6 @@ from figuregen import util
 import pyexr
 import os
 import numpy as np
-import cv2
-from pdf2image import convert_from_path
 
 # Load images
 methods = [
@@ -38,7 +36,7 @@ def make_figure(scene_folder, cropA, cropB, scene_name, exposure=0, show_method_
     error_metric_name = "relMSE"
 
     def tonemap(img):
-        return figuregen.PNG(util.image.lin_to_srgb(util.image.exposure(img, exposure)))
+        return figuregen.JPEG(util.image.lin_to_srgb(util.image.exposure(img, exposure)), quality=80)
 
     # Reference image
     ref_grid = figuregen.Grid(1, 1)

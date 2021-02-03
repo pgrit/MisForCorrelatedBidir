@@ -2,5 +2,7 @@
     "editor.rulers": [
         110
     ],
-    "python.pythonPath": "C:\\Users\\grittmann\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
+    "python.analysis.extraPaths": [
+        "BidirExperiment", "VcmExperiment", "VideoGen"
+    ]
 }

@@ -16,6 +16,10 @@ Properties
 */Results-*/*/**
 */Results-*/*.pdf
 */Results/*.pdf
+*/Results-*/*.html
+*/Results/*.html
+*/Results-*/*.pptx
+*/Results/*.pptx
 */Results-*/*.png
 */Results/*.png
 !Webpage/Results/Vcm/index.html

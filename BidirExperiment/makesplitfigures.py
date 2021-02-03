@@ -12,7 +12,7 @@ factors = [
 scene_folder = "IndirectRoom"
 
 def tonemap(img):
-    return figuregen.PNG(util.image.lin_to_srgb(img))
+    return figuregen.JPEG(util.image.lin_to_srgb(img), quality=80)
 
 grid = figuregen.Grid(num_cols=3, num_rows=1)
 

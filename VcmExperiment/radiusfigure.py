@@ -47,6 +47,9 @@ methods = [
     ("Balance", "Vcm"),
 ]
 
+def tonemap(img, exposure):
+    return figuregen.JPEG(util.image.lin_to_srgb(util.image.exposure(img, exposure)), quality=80)
+
 def make_plot():
     rs = [1.0/100.0, 1.0/10.0, 0.5, 1, 2, 10, 100]
     data = []
@@ -68,8 +71,8 @@ def make_plot():
         data.append([rs, speedups])
         names.append(config["scene_name"])
 
-    plot = figuregen.MatplotLinePlot(aspect_ratio=0.6, data=data)
-
+    plot = figuregen.PgfLinePlot(aspect_ratio=0.6, data=data)
+    plot.set_padding(3.5, 5)
     plot.set_axis_label('x', "Radius")
     plot.set_axis_label('y', "Error")
 
@@ -88,7 +91,7 @@ def make_plot():
     plot.set_axis_properties('x', ticks=[1.0/100.0, 1.0/10.0, 0.5, 1, 2, 10])
     plot.set_axis_properties('y', ticks=[0.1, 0.5, 1.0], use_log_scale=False, range=[0.1, 1.2])
 
-    plot.set_v_line(pos=1, color=[0,0,0], linestyle=(-5,(4,6)), linewidth_pt=0.6)
+    plot.set_v_line(pos=1, color=[0,0,0], linestyle=(4,6), linewidth_pt=0.6)
 
     plot_module = figuregen.Grid(1,1)
     plot_module.get_element(0,0).set_image(plot)
@@ -97,7 +100,7 @@ def make_plot():
     for i in range(6):
         e = reference_grid.get_element(int(i / 3), i % 3)
         img = pyexr.read(os.path.join(scene_configs[i]["scene_folder"], "reference.exr"))[:,:,:3]
-        tm = figuregen.PNG(util.image.lin_to_srgb(util.image.exposure(img, scene_configs[i]["exposure"])))
+        tm = tonemap(img, scene_configs[i]["exposure"])
         e.set_image(tm)
         e.set_caption(scene_configs[i]["scene_name"])
         e.set_frame(3, colors[i])
@@ -105,7 +108,7 @@ def make_plot():
     l.set_caption(2.8, fontsize=8, offset_mm=0.5)
     l.set_padding(left=1)
 
-    figuregen.figure([[plot_module, reference_grid]], 17.7, "Results/RadiusFigure.pdf",
+    figuregen.figure([[plot_module, reference_grid]], 17.7, "Results/RadiusFigure2.pdf",
         tex_packages=["{dfadobe}"])
 
 make_plot()
