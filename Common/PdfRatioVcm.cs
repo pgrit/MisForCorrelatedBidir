@@ -7,7 +7,8 @@ using SeeSharp.Integrators.Common;
 
 namespace MisForCorrelatedBidir.Common {
     public class PdfRatioVcm : VertexConnectionAndMerging {
-        public RadiusInitializer RadiusInitializer;
+        public RadiusInitializer RadiusInitializer =
+            new RadiusInitFov { ScalingFactor = MathF.Tan(MathF.PI / 180) };
 
         /// <summary>
         /// If set to true, disables our method and instead sets the number of samples n=1 for merges.
