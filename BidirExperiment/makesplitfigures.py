@@ -1,4 +1,4 @@
-import pyexr
+import simpleimageio
 import figuregen
 from figuregen import util
 import os
@@ -32,10 +32,10 @@ crop = util.image.Cropbox(top=300, left=50, height=48, width=64, scale=10)
 i = 0
 for name, factor in factors:
     bal_filename = os.path.join(factor, scene_folder, "BidirSplit", "render.exr")
-    bal = pyexr.read(bal_filename)
+    bal = simpleimageio.read(bal_filename)
     our_filename = os.path.join(factor, scene_folder, "PdfRatio", "render.exr")
-    our = pyexr.read(our_filename)
-    reference_image = pyexr.read(os.path.join(factor, scene_folder, "reference.exr"))
+    our = simpleimageio.read(our_filename)
+    reference_image = simpleimageio.read(os.path.join(factor, scene_folder, "reference.exr"))
 
     err_bal = util.image.relative_mse_outlier_rejection(bal, reference_image, 0.01)
     err_our = util.image.relative_mse_outlier_rejection(our, reference_image, 0.01)

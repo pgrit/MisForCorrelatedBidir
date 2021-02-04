@@ -1,4 +1,4 @@
-import pyexr
+import simpleimageio
 import figuregen
 from figuregen import util
 import os
@@ -27,10 +27,10 @@ class FrameData:
             ("Ours", "PdfRatio"),
         ]
         self.method_images = [
-            pyexr.read(os.path.join(self.scene_folder, folder, "render.exr"))
+            simpleimageio.read(os.path.join(self.scene_folder, folder, "render.exr"))
             for _, folder in self.methods
         ]
-        self.reference_image = pyexr.read(os.path.join(self.scene_folder, "reference.exr"))
+        self.reference_image = simpleimageio.read(os.path.join(self.scene_folder, "reference.exr"))
 
         # Compute error values
         self.errors = [
@@ -45,7 +45,7 @@ class FrameData:
         ]
         self.technique_images = [
             [
-                [ pyexr.read(os.path.join(self.scene_folder, folder, "render", t)) for t in row ]
+                [ simpleimageio.read(os.path.join(self.scene_folder, folder, "render", t)) for t in row ]
                 for row in techniques
             ] for _, folder in self.methods
         ]
@@ -56,7 +56,7 @@ class FrameData:
         ]
         self.raw_technique_images = [
             [
-                [ pyexr.read(os.path.join(self.scene_folder, folder, "render", t)) for t in row ]
+                [ simpleimageio.read(os.path.join(self.scene_folder, folder, "render", t)) for t in row ]
                 for row in raw_techniques
             ] for _, folder in self.methods
         ]
@@ -67,7 +67,7 @@ class FrameData:
             for d in range(3,6)
         ]
         self.varfactor_images = [
-            [ pyexr.read(os.path.join(self.scene_folder, "VarAwareRef", "render", t)) for t in row ]
+            [ simpleimageio.read(os.path.join(self.scene_folder, "VarAwareRef", "render", t)) for t in row ]
             for row in varfactors
         ]
 

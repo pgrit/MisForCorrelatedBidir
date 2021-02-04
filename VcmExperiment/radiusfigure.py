@@ -1,4 +1,4 @@
-import pyexr
+import simpleimageio
 import figuregen
 from figuregen import util
 import os
@@ -57,10 +57,10 @@ def make_plot():
 
     for config in scene_configs:
         method_images = [
-            pyexr.read(os.path.join(config["scene_folder"], folder, "render.exr"))
+            simpleimageio.read(os.path.join(config["scene_folder"], folder, "render.exr"))
             for _, folder in methods
         ]
-        reference_image = pyexr.read(os.path.join(config["scene_folder"], "reference.exr"))[:,:,:3]
+        reference_image = simpleimageio.read(os.path.join(config["scene_folder"], "reference.exr"))[:,:,:3]
         scene_err = [
             util.image.relative_mse_outlier_rejection(m, reference_image, 0.01)
             for m in method_images
@@ -99,7 +99,7 @@ def make_plot():
     reference_grid = figuregen.Grid(num_rows=2, num_cols=3)
     for i in range(6):
         e = reference_grid.get_element(int(i / 3), i % 3)
-        img = pyexr.read(os.path.join(scene_configs[i]["scene_folder"], "reference.exr"))[:,:,:3]
+        img = simpleimageio.read(os.path.join(scene_configs[i]["scene_folder"], "reference.exr"))[:,:,:3]
         tm = tonemap(img, scene_configs[i]["exposure"])
         e.set_image(tm)
         e.set_caption(scene_configs[i]["scene_name"])

@@ -1,6 +1,6 @@
 import figuregen
 from figuregen import util
-import pyexr
+import simpleimageio
 import os
 import numpy as np
 
@@ -14,10 +14,10 @@ methods = [
 
 def make_figure(scene_folder, cropA, cropB, scene_name, exposure=0, show_method_names=True, times=None):
     method_images = [
-        pyexr.read(os.path.join(scene_folder, folder, "render.exr"))
+        simpleimageio.read(os.path.join(scene_folder, folder, "render.exr"))
         for _, folder in methods
     ]
-    reference_image = pyexr.read(os.path.join(scene_folder, "reference.exr"))[:,:,:3]
+    reference_image = simpleimageio.read(os.path.join(scene_folder, "reference.exr"))[:,:,:3]
 
     # Remove NaN and Inf values to not pollute the error (the right way would be to fix them ...)
     for m in method_images:

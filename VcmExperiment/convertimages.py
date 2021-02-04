@@ -1,4 +1,4 @@
-import pyexr
+import simpleimageio
 import cv2
 import numpy as np
 import os
@@ -41,9 +41,9 @@ for scene in scenes:
     os.makedirs(out_folder, exist_ok=True)
 
     # load images and write pngs
-    ref = pyexr.read(os.path.join(folder, scene, "reference.exr"))
+    ref = simpleimageio.read(os.path.join(folder, scene, "reference.exr"))
     png_export(lin_to_srgb(ref), os.path.join(out_folder, "reference.png"))
 
     for m, name in methods:
-        img = pyexr.read(os.path.join(folder, scene, m, "render.exr"))
+        img = simpleimageio.read(os.path.join(folder, scene, m, "render.exr"))
         png_export(lin_to_srgb(img), os.path.join(out_folder, f"{name}.png"))
