@@ -4,15 +4,23 @@ import simpleimageio
 import os
 import numpy as np
 
-# Load images
-methods = [
-    ("a) Balance", "BidirSplit"),
-    ("b) [PRDD15]", "UpperBound"),
-    ("c) [GGSK19]", "VarAware"),
-    ("d) \\textbf{Ours}", "PdfRatio"),
-]
+def outline(text, outline_clr=[10,10,10], text_clr=[250,250,250]):
+    if outline_clr is None:
+        res = "\\definecolor{FillClr}{RGB}{" + f"{text_clr[0]},{text_clr[1]},{text_clr[2]}" + "}"
+        return res + "\\textcolor{FillClr}{" + text + "}"
+    
+    res = "\\DeclareDocumentCommand{\\Outlined}{ O{black} O{white} O{0.55pt} m }{"\
+            "\\contourlength{#3}"\
+            "\\contour{#2}{\\textcolor{#1}{#4}}"\
+        "}"
+    res += "\\definecolor{FillClr}{RGB}{" + f"{text_clr[0]},{text_clr[1]},{text_clr[2]}" + "}"
+    res += "\\definecolor{StrokeClr}{RGB}{" + f"{outline_clr[0]},{outline_clr[1]},{outline_clr[2]}" + "}"
 
-def make_figure(scene_folder, cropA, cropB, scene_name, exposure=0, show_method_names=True, times=None):
+    res += "\\Outlined[FillClr][StrokeClr][0.55pt]{"+ text + "}"
+    return res
+
+def make_figure(methods, scene_folder, cropA, cropB, scene_name, exposure=0, show_method_names=True, 
+                times=None, outline_color=[10, 10, 10], text_color=[250, 250, 250]):
     method_images = [
         simpleimageio.read(os.path.join(scene_folder, folder, "render.exr"))
         for _, folder in methods
@@ -68,17 +76,6 @@ def make_figure(scene_folder, cropA, cropB, scene_name, exposure=0, show_method_
 
         return value + speedup
 
-    # Compute outline color from dominant color of the reference
-    outline_clr = [10,10,10]
-    def make_contour(org):
-        res = "\\definecolor{CharFillColor}{RGB}{250,250,250}"
-        res += "\\definecolor{CharStrokeColor}{RGB}{"
-        res += f"{outline_clr[0]},{outline_clr[1]},{outline_clr[2]}"
-        res += "}"
-        res += "\\contourlength{0.75pt} \\contournumber{40}" + "\\contour{CharStrokeColor}"
-        res += "{\\textcolor{CharFillColor}{"+ org + "}}"
-        return res
-
     label_params = {
         "width_mm": 20,
         "height_mm": 4,
@@ -90,22 +87,34 @@ def make_figure(scene_folder, cropA, cropB, scene_name, exposure=0, show_method_
         "pos": "bottom_center"
     }
 
+    def get_color(clr, i):
+        if len(clr) == 2:
+            return clr[i]
+        else:
+            return clr
+
     # Comparison grid
     crop_grid = figuregen.Grid(num_cols=len(methods) + 1, num_rows=2)
     for col in range(1, len(methods)+1):
-        crop_grid.get_element(0, col).set_image(tonemap(cropA.crop(method_images[col-1])))
-        crop_grid.get_element(0, col).set_label(make_contour(error_string(col-1, crop_errors_A)),
+        crop_grid[0, col].set_image(tonemap(cropA.crop(method_images[col-1])))
+        crop_grid[0, col].set_label(outline(error_string(col-1, crop_errors_A), 
+            get_color(outline_color, 0), get_color(text_color, 0)),
             **label_params)
 
-        crop_grid.get_element(1, col).set_image(tonemap(cropB.crop(method_images[col-1])))
-        crop_grid.get_element(1, col).set_label(make_contour(error_string(col-1, crop_errors_B)),
+        crop_grid[1, col].set_image(tonemap(cropB.crop(method_images[col-1])))
+        crop_grid[1, col].set_label(outline(error_string(col-1, crop_errors_B), 
+            get_color(outline_color, 1), get_color(text_color, 1)),
             **label_params)
 
-    crop_grid.get_element(0, 0).set_image(tonemap(cropA.crop(reference_image)))
-    crop_grid.get_element(0, 0).set_label(make_contour(f"{error_metric_name} (crop)"), **label_params)
+    crop_grid[0, 0].set_image(tonemap(cropA.crop(reference_image)))
+    crop_grid[0, 0].set_label(outline(f"{error_metric_name} (crop)", 
+        get_color(outline_color, 0), get_color(text_color, 0)), 
+        **label_params)
 
-    crop_grid.get_element(1, 0).set_image(tonemap(cropB.crop(reference_image)))
-    crop_grid.get_element(1, 0).set_label(make_contour(f"{error_metric_name} (crop)"), **label_params)
+    crop_grid[1, 0].set_image(tonemap(cropB.crop(reference_image)))
+    crop_grid[1, 0].set_label(outline(f"{error_metric_name} (crop)", 
+        get_color(outline_color, 1), get_color(text_color, 1)), 
+        **label_params)
 
     # Column titles
     names = ["Reference"]

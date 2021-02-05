@@ -1,3 +1,7 @@
+# Add the parent directory to the PYTHONPATH so we find the common figurelayout module
+import sys
+sys.path.append("..")
+
 import numpy as np
 import figuregen
 from figuregen import util
@@ -9,59 +13,70 @@ crop_scale = 5
 width_cm = 17.7
 threads = []
 
+methods = [
+    ("a) Balance", "BidirSplit"),
+    ("b) [PRDD15]", "UpperBound"),
+    ("c) [GGSK19]", "VarAware"),
+    ("d) \\textbf{Ours}", "PdfRatio"),
+]
+
 def make(variant):
     paper_figure_params = [
-        (f"{variant}/LivingRoom",
+        (methods, f"{variant}/LivingRoom",
             util.image.Cropbox(top=40*2, left=200*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=10*2, left=10*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Living Room}", 0, True,
-            ["195s", "195s", "220s", "195s"]),
+            ["195s", "195s", "220s", "195s"], 
+            [80, 50, 40], [250, 250, 250]
+        ),
 
-        (f"{variant}/ModernHall",
+        (methods, f"{variant}/ModernHall",
             util.image.Cropbox(top=300, left=80, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=280*2, left=280*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Modern Hall}", 1, False,
-            ["155s", "155s", "210s", "155s"])
+            ["155s", "155s", "210s", "155s"], 
+            [[205, 197, 172], [54, 44, 34]], [[0, 0, 0], [250, 250, 250]]
+        )
     ]
 
     additional_figure_params = [
-        (f"{variant}/MinimalistWhiteRoom",
+        (methods, f"{variant}/MinimalistWhiteRoom",
             util.image.Cropbox(top=90*2, left=5*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=150*2, left=270*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Minimalist White Room}", 1, True,
             ["75s", "75s", "85s", "75s"]),
 
-        (f"{variant}/TargetPractice",
+        (methods, f"{variant}/TargetPractice",
             util.image.Cropbox(top=20*2, left=370*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=400*2, left=530*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Target Practice}", 1, False,
             ["260s", "260s", "280s", "260s"]),
 
-        (f"{variant}/ContemporaryBathroom",
+        (methods, f"{variant}/ContemporaryBathroom",
             util.image.Cropbox(top=90*2, left=570*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=300*2, left=190*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Bathroom}", 1, False,
             ["90s", "90s", "93s", "90s"]),
 
-        (f"{variant}/HomeOffice",
+        (methods, f"{variant}/HomeOffice",
             util.image.Cropbox(top=80*2, left=570*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=170*2, left=345*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Home Office}", 1, False,
             ["260s", "260s", "290s", "260s"]),
 
-        (f"{variant}/RoughGlasses",
+        (methods, f"{variant}/RoughGlasses",
             util.image.Cropbox(top=240*2, left=445*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=260*2, left=525*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Rough Glasses}", 0, False,
             ["210s", "210s", "210s", "210s"]),
 
-        (f"{variant}/RoughGlassesIndirect",
+        (methods, f"{variant}/RoughGlassesIndirect",
             util.image.Cropbox(top=240*2, left=150*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=290*2, left=350*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Rough Glasses}", 1, False,
             ["120s", "120s", "140s", "120s"]),
 
-        (f"{variant}/IndirectRoom",
+        (methods, f"{variant}/IndirectRoom",
             util.image.Cropbox(top=430, left=300, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=747, left=1067, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Indirect Room}", 0, False,
@@ -81,12 +96,12 @@ def make(variant):
         additional_figures[i] = additional_figures[i].result()
 
     t = threading.Thread(target=figuregen.figure, args=(paper_figures, width_cm, f"{variant}/BidirFigure.pdf"),
-        kwargs={"tex_packages": ["{dfadobe}", "{contour}", "{color}"]})
+        kwargs={"tex_packages": ["{dfadobe}", "[outline]{contour}", "{color}", "{xparse}"]})
     t.start()
     threads.append(t)
 
     t = threading.Thread(target=figuregen.figure, args=(additional_figures, width_cm, f"{variant}/BidirOther.pdf"),
-        kwargs={"tex_packages": ["{dfadobe}", "{contour}", "{color}"]})
+        kwargs={"tex_packages": ["{dfadobe}", "[outline]{contour}", "{color}", "{xparse}"]})
     t.start()
     threads.append(t)
 
