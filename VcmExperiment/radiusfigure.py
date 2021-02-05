@@ -108,7 +108,7 @@ def make_plot():
     l.set_caption(2.8, fontsize=8, offset_mm=0.5)
     l.set_padding(left=1)
 
-    figuregen.figure([[plot_module, reference_grid]], 17.7, "Results/RadiusFigure2.pdf",
+    figuregen.figure([[plot_module, reference_grid]], 17.7, "Results/RadiusFigure.pdf",
         tex_packages=["{dfadobe}"])
 
 make_plot()
