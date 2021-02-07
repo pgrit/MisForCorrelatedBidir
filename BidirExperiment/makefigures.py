@@ -14,10 +14,10 @@ width_cm = 17.7
 threads = []
 
 methods = [
-    ("a) Balance", "BidirSplit"),
-    ("b) [PRDD15]", "UpperBound"),
-    ("c) [GGSK19]", "VarAware"),
-    ("d) \\textbf{Ours}", "PdfRatio"),
+    ("(a) Balance", "BidirSplit"),
+    ("(b) [PRDD15]", "UpperBound"),
+    ("(c) [GGSK19]", "VarAware"),
+    ("(d) \\textbf{Ours}", "PdfRatio"),
 ]
 
 def make(variant):
@@ -26,7 +26,7 @@ def make(variant):
             util.image.Cropbox(top=40*2, left=200*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=10*2, left=10*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Living Room}", 0, True,
-            ["195s", "195s", "220s", "195s"], 
+            ["195s", "195s", "220s", "195s"],
             [80, 50, 40], [250, 250, 250]
         ),
 
@@ -34,7 +34,7 @@ def make(variant):
             util.image.Cropbox(top=300, left=80, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=280*2, left=280*2, width=64*2, height=48*2, scale=crop_scale),
             "\\textsc{Modern Hall}", 1, False,
-            ["155s", "155s", "210s", "155s"], 
+            ["155s", "155s", "210s", "155s"],
             [[205, 197, 172], [54, 44, 34]], [[0, 0, 0], [250, 250, 250]]
         )
     ]

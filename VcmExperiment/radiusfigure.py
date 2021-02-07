@@ -73,7 +73,7 @@ def make_plot():
 
     plot = figuregen.PgfLinePlot(aspect_ratio=0.6, data=data)
     plot.set_padding(3.5, 5)
-    plot.set_axis_label('x', "Radius")
+    plot.set_axis_label('x', "Radius scale")
     plot.set_axis_label('y', "Error")
 
     colors = [

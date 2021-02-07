@@ -11,11 +11,10 @@ import concurrent.futures
 
 crop_scale = 5
 methods = [
-    ("a) Balance", "Vcm"),
-    ("b) [Jen19]", "JendersieFootprint"),
-    ("c) [GGSK19]", "VarAwareMisLive"),
-    ("d) \\textbf{Ours}", "PdfRatioCombined"),
-    # ("e) [GGSK19] long", "VarAwareMis"),
+    ("(a) Balance", "Vcm"),
+    ("(b) [Jen19]", "JendersieFootprint"),
+    ("(c) [GGSK19]", "VarAwareMisLive"),
+    ("(d) \\textbf{Ours}", "PdfRatioCombined"),
 ]
 
 start = time.time()
@@ -30,7 +29,7 @@ paper_figure_params = [
         util.image.Cropbox(top=90*2, left=5*2, width=64*2, height=48*2, scale=crop_scale),
         util.image.Cropbox(top=150*2, left=270*2, width=64*2, height=48*2, scale=crop_scale),
         "\\textsc{Minimalist Room}", 2, False,
-        ["44s", "44s", "56s", "44s", "280s"], 
+        ["44s", "44s", "56s", "44s", "280s"],
         [[253,254,224], [57, 49, 30]], [[0,0,0], [250,250,250]]
     ),
 
@@ -107,9 +106,9 @@ print(f"Processing data took {time.time() - start:.2f}s")
 start = time.time()
 
 width_cm = 17.7
-t1 = threading.Thread(target = figuregen.figure, args=(paper_figures, width_cm, "Results/VcmFigure.pdf"), 
+t1 = threading.Thread(target = figuregen.figure, args=(paper_figures, width_cm, "Results/VcmFigure.pdf"),
     kwargs={"tex_packages": ["{dfadobe}", "[outline]{contour}", "{color}", "{xparse}"]})
-t2 = threading.Thread(target = figuregen.figure, args=(additional_figures, width_cm, "Results/VcmOther.pdf"), 
+t2 = threading.Thread(target = figuregen.figure, args=(additional_figures, width_cm, "Results/VcmOther.pdf"),
     kwargs={"tex_packages": ["{dfadobe}", "[outline]{contour}", "{color}", "{xparse}"]})
 t1.start()
 t2.start()

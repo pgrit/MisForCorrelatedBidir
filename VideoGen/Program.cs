@@ -16,8 +16,10 @@ namespace MisForCorrelatedBidir.VideoGen {
 
             bench.Run(forceReference: true);
 
-            Process.Start("python", "./MakeVideoFrames.py");
-            Process.Start("python", "./Figure3.py");
+            var p1 = Process.Start("python", "./makevideo.py");
+            var p2 = Process.Start("python", "./makefigure.py");
+            p1.WaitForExit();
+            p2.WaitForExit();
         }
     }
 }

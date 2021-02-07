@@ -10,7 +10,8 @@ namespace MisForCorrelatedBidir.VideoGen {
     abstract class ExperimentSetup : SeeSharp.Experiments.ExperimentFactory {
         public override FrameBuffer.Flags FrameBufferFlags => FrameBuffer.Flags.SendToTev;
 
-        protected virtual int MaxDepth => 5;
+        protected virtual int MaxDepth => 3;
+        protected virtual int MinDepth => 3;
         protected virtual int Samples => 4;
 
         protected virtual int TrainingSamples => 128;
@@ -18,18 +19,19 @@ namespace MisForCorrelatedBidir.VideoGen {
         public override List<Method> MakeMethods() {
             return new List<Method>() {
                 new Method("Vcm", new VertexConnectionAndMerging() {
-                    MaxDepth = MaxDepth, NumIterations = Samples, MergePrimary = true,
+                    MinDepth = MinDepth, MaxDepth = MaxDepth, NumIterations = Samples, MergePrimary = true,
                     RenderTechniquePyramid = true, EnableLightTracing = false,
                     EnableConnections = false, EnableNextEvent = false, EnableBsdfLightHit = false
                 }),
                 new Method("PdfRatio", new PdfRatioVcm() {
-                    MaxDepth = MaxDepth, NumIterations = Samples, MergePrimary = true,
+                    MinDepth = MinDepth, MaxDepth = MaxDepth, NumIterations = Samples, MergePrimary = true,
                     RenderTechniquePyramid = true, EnableLightTracing = false,
                     EnableConnections = false, EnableNextEvent = false, EnableBsdfLightHit = false,
                     RadiusInitializer = new RadiusInitFov { ScalingFactor = MathF.Tan(MathF.PI / 180) }
                 }),
                 new Method("VarAwareRef", new VarAwareMisVcm() {
-                    MaxDepth = MaxDepth, NumIterations = Samples + TrainingSamples, MergePrimary = true,
+                    MinDepth = MinDepth, MaxDepth = MaxDepth, NumIterations = Samples + TrainingSamples,
+                    MergePrimary = true,
                     RenderTechniquePyramid = true, EnableLightTracing = false,
                     EnableConnections = false, EnableNextEvent = false, EnableBsdfLightHit = false,
                     NumTrainingSamples = TrainingSamples, ResetAfterTraining = true
@@ -38,7 +40,7 @@ namespace MisForCorrelatedBidir.VideoGen {
         }
 
         public override Integrator MakeReferenceIntegrator() =>
-            new ClassicBidir() { MaxDepth = MaxDepth, NumIterations = 128 };
+            new ClassicBidir() { MinDepth = MinDepth, MaxDepth = MaxDepth, NumIterations = 128 };
     }
 
     class Frame : ExperimentSetup {
