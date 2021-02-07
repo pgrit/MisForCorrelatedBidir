@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <!-- <PackageReference Include="SeeSharp" Version="0.2.0" /> -->
-    <ProjectReference Include="../../SeeSharp/SeeSharp/SeeSharp.csproj" />
+    <PackageReference Include="SeeSharp" Version="0.2.1" />
   </ItemGroup>
 
   <PropertyGroup>
