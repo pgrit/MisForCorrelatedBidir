@@ -8,7 +8,7 @@ def outline(text, outline_clr=[10,10,10], text_clr=[250,250,250]):
     if outline_clr is None:
         res = "\\definecolor{FillClr}{RGB}{" + f"{text_clr[0]},{text_clr[1]},{text_clr[2]}" + "}"
         return res + "\\textcolor{FillClr}{" + text + "}"
-    
+
     res = "\\DeclareDocumentCommand{\\Outlined}{ O{black} O{white} O{0.55pt} m }{"\
             "\\contourlength{#3}"\
             "\\contour{#2}{\\textcolor{#1}{#4}}"\
@@ -19,7 +19,7 @@ def outline(text, outline_clr=[10,10,10], text_clr=[250,250,250]):
     res += "\\Outlined[FillClr][StrokeClr][0.55pt]{"+ text + "}"
     return res
 
-def make_figure(methods, scene_folder, cropA, cropB, scene_name, exposure=0, show_method_names=True, 
+def make_figure(methods, scene_folder, cropA, cropB, scene_name, exposure=0, show_method_names=True,
                 times=None, outline_color=[10, 10, 10], text_color=[250, 250, 250]):
     method_images = [
         simpleimageio.read(os.path.join(scene_folder, folder, "render.exr"))
@@ -36,8 +36,8 @@ def make_figure(methods, scene_folder, cropA, cropB, scene_name, exposure=0, sho
 
     # Compute error values
     errors = [
-        # util.image.relative_mse(m, reference_image, 0.01)
-        util.image.relative_mse_outlier_rejection(m, reference_image, 0.01)
+        util.image.relative_mse(m, reference_image, 0.01)
+        # util.image.relative_mse_outlier_rejection(m, reference_image, 0.01)
         # util.image.smape(m, reference_image)
         for m in method_images
     ]
@@ -97,23 +97,23 @@ def make_figure(methods, scene_folder, cropA, cropB, scene_name, exposure=0, sho
     crop_grid = figuregen.Grid(num_cols=len(methods) + 1, num_rows=2)
     for col in range(1, len(methods)+1):
         crop_grid[0, col].set_image(tonemap(cropA.crop(method_images[col-1])))
-        crop_grid[0, col].set_label(outline(error_string(col-1, crop_errors_A), 
+        crop_grid[0, col].set_label(outline(error_string(col-1, crop_errors_A),
             get_color(outline_color, 0), get_color(text_color, 0)),
             **label_params)
 
         crop_grid[1, col].set_image(tonemap(cropB.crop(method_images[col-1])))
-        crop_grid[1, col].set_label(outline(error_string(col-1, crop_errors_B), 
+        crop_grid[1, col].set_label(outline(error_string(col-1, crop_errors_B),
             get_color(outline_color, 1), get_color(text_color, 1)),
             **label_params)
 
     crop_grid[0, 0].set_image(tonemap(cropA.crop(reference_image)))
-    crop_grid[0, 0].set_label(outline(f"{error_metric_name} (crop)", 
-        get_color(outline_color, 0), get_color(text_color, 0)), 
+    crop_grid[0, 0].set_label(outline(f"{error_metric_name} (crop)",
+        get_color(outline_color, 0), get_color(text_color, 0)),
         **label_params)
 
     crop_grid[1, 0].set_image(tonemap(cropB.crop(reference_image)))
-    crop_grid[1, 0].set_label(outline(f"{error_metric_name} (crop)", 
-        get_color(outline_color, 1), get_color(text_color, 1)), 
+    crop_grid[1, 0].set_label(outline(f"{error_metric_name} (crop)",
+        get_color(outline_color, 1), get_color(text_color, 1)),
         **label_params)
 
     # Column titles
