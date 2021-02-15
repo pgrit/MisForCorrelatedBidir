@@ -34,14 +34,14 @@ cd VcmExperiment
 python ./makefigures.py
 ```
 
-## Compiling SeeSharp ([version 0.2.0](https://github.com/pgrit/SeeSharp/releases/tag/v0.2.0))
+## Compiling SeeSharp ([version 0.2.1](https://github.com/pgrit/SeeSharp/releases/tag/v0.2.1))
 
-The rendering experiments are based on the SeeSharp rendering framework. 
-They have been tested with version 0.2.0, which is available via Nuget.
+The rendering experiments are based on the SeeSharp rendering framework.
+They have been tested with version 0.2.1, which is available via Nuget.
 
 <a href="https://www.nuget.org/packages/SeeSharp/"><img src="https://buildstats.info/nuget/SeeSharp" /></a>
 
-SeeSharp, in turn, relies on two C++ wrapper libraries: [TinyEmbree](https://github.com/pgrit/TinyEmbree) and [SimpleImageIO](https://github.com/pgrit/SimpleImageIO). Currently, only 64 bit binaries for Windows and Linux are available via nuget. On other architectures / OSs you will need to compile them from source. Instructions can be found in the respective README.md files.
+SeeSharp, in turn, relies on two C++ wrapper libraries: [TinyEmbree](https://github.com/pgrit/TinyEmbree) and [SimpleImageIO](https://github.com/pgrit/SimpleImageIO). Currently, only x86-64 binaries for Windows, Linux, and macOS are available via Nuget. On other architectures / OSs you will need to compile them from source. Instructions can be found in the respective README.md files.
 
 ## Test scenes and licensing
 
