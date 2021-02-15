@@ -14,7 +14,7 @@ width_cm = 17.7
 threads = []
 
 methods = [
-    ("(a) Balance", "BidirSplit"),
+    ("(a) Balance heuristic", "BidirSplit"),
     ("(b) [PRDD15]", "UpperBound"),
     ("(c) [GGSK19]", "VarAware"),
     ("(d) \\textbf{Ours}", "PdfRatio"),

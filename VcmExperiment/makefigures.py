@@ -11,7 +11,7 @@ import concurrent.futures
 
 crop_scale = 5
 methods = [
-    ("(a) Balance", "Vcm"),
+    ("(a) Balance heuristic", "Vcm"),
     ("(b) [Jen19]", "JendersieFootprint"),
     ("(c) [GGSK19]", "VarAwareMisLive"),
     ("(d) \\textbf{Ours}", "PdfRatioCombined"),

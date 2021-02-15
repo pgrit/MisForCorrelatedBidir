@@ -59,7 +59,7 @@ for name, factor in factors:
         res += "\\Outlined[FillClr][StrokeClr][0.55pt]{"+ org + "}"
         return res
 
-    e.set_label(outline("relMSE: ") + outline(f"{err_bal:.2f}") + "\n" + outline("Balance"),
+    e.set_label(outline("relMSE: ") + outline(f"{err_bal:.2f}") + "\n" + outline("Balance heur."),
         "top_left", **label_params)
     e.set_label(outline("Ours") + "\n" + outline("relMSE: ") + outline(f"{err_our:.2f}"),
         "bottom_right", **label_params)
