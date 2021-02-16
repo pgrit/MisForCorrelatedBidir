@@ -8,7 +8,7 @@ This is the original codebase used to generate all results and figures in the pa
 
 ## Building and running
 
-On 64 bit Windows or Linux, dependencies are downloaded automatically from Nuget. You can simply run the two experiments in Release mode:
+On x86-64 bit Windows, Linux, or macOS, dependencies are downloaded automatically from Nuget. You can simply run the two experiments in Release mode:
 
 ```
 cd VcmExperiment
@@ -21,7 +21,7 @@ On other platforms, you need to compile the dependencies from source, as outline
 
 ## Creating figures
 
-The figures where generated with [figuregen](https://github.com/Mira-13/figure-gen) version 0.7.1. You can install that exact version via pip:
+The figures were generated with [figuregen](https://github.com/Mira-13/figure-gen) version 0.7.1. You can install that exact version via pip:
 
 ```
 python -m pip install figuregen==0.7.1
