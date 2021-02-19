@@ -3896,7 +3896,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/pic2.jpg"
+        "path": "textures/pic2.jpg"
       },
       "name": "Default_OBJ.230"
     },
@@ -3904,7 +3904,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/pic3.jpg"
+        "path": "textures/pic3.jpg"
       },
       "name": "Default_OBJ.231"
     },
@@ -3912,7 +3912,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/pic4.jpg"
+        "path": "textures/pic4.jpg"
       },
       "name": "Default_OBJ.232"
     },
@@ -3920,7 +3920,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/pic1.jpg"
+        "path": "textures/pic1.jpg"
       },
       "name": "Default_OBJ.233"
     },
@@ -4840,7 +4840,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/Arch33_025_fabric_color.jpg"
+        "path": "textures/Arch33_025_fabric_color.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -4854,7 +4854,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/fabric.jpg"
+        "path": "textures/fabric.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -4868,7 +4868,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/archinteriors_vol6_003_floor.jpg"
+        "path": "textures/archinteriors_vol6_003_floor.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -4882,7 +4882,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/Arch31_062_flower_yellow.jpg"
+        "path": "textures/Arch31_062_flower_yellow.jpg"
       },
       "name": "flower"
     },
@@ -5062,7 +5062,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/archinteriors_vol6_003_wood3.jpg"
+        "path": "textures/archinteriors_vol6_003_wood3.jpg"
       },
       "name": "Table"
     },
@@ -5070,7 +5070,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/plaster.jpg"
+        "path": "textures/plaster.jpg"
       },
       "name": "Walls"
     },
@@ -5090,7 +5090,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/archinteriors_vol6_003_wood2.jpg"
+        "path": "textures/archinteriors_vol6_003_wood2.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -5104,7 +5104,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "Textures/archinteriors_vol6_003_wood1.jpg"
+        "path": "textures/archinteriors_vol6_003_wood1.jpg"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,

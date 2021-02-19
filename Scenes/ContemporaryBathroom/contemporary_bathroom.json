@@ -100,7 +100,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "textures\\rug.png"
+        "path": "textures/rug.png"
       },
       "roughness": 0.5,
       "anisotropic": 0.0,
@@ -192,7 +192,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "textures\\picture1.png"
+        "path": "textures/picture1.png"
       },
       "roughness": 0.0,
       "anisotropic": 0.0,
@@ -218,7 +218,7 @@
       "type": "generic",
       "baseColor": {
         "type": "texture",
-        "path": "textures\\picture1.png"
+        "path": "textures/picture1.png"
       },
       "roughness": 0.8416666984558105,
       "anisotropic": 0.0,

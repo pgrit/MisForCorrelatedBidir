@@ -396,7 +396,7 @@
       "type": "diffuse",
       "baseColor": {
         "type": "texture",
-        "path": "Textures\\kitchen_wood_diff_2k.jpg"
+        "path": "textures/kitchen_wood_diff_2k.jpg"
       },
       "name": "Floor"
     },
