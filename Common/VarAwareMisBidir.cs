@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using System.Numerics;
 using TinyEmbree;
-using SeeSharp.Core;
-using SeeSharp.Core.Geometry;
-using SeeSharp.Core.Image;
-using SeeSharp.Core.Sampling;
-using SeeSharp.Core.Shading;
-using SeeSharp.Core.Shading.Emitters;
 using SeeSharp.Integrators;
 using SeeSharp.Integrators.Bidir;
 using SeeSharp.Integrators.Common;
+using SeeSharp.Image;
+using SimpleImageIO;
+using SeeSharp.Sampling;
+using SeeSharp.Geometry;
+using SeeSharp.Shading.Emitters;
+using SeeSharp;
+using System;
 
 namespace MisForCorrelatedBidir.Common {
     public class NextEventVarianceFactors {
@@ -42,8 +43,8 @@ namespace MisForCorrelatedBidir.Common {
             int width = moments[0].Width;
             int height = moments[0].Height;
             var filter = new BoxFilter(4);
-            Image<Scalar> momentBuffer = new(width, height);
-            Image<Scalar> varianceBuffer = new(width, height);
+            MonochromeImage momentBuffer = new(width, height);
+            MonochromeImage varianceBuffer = new(width, height);
 
             // Compute the variance factors for use in the next iteration
             for (int i = 0; i < moments.Count; ++i) {
@@ -54,11 +55,11 @@ namespace MisForCorrelatedBidir.Common {
                 filter.Apply(pixelValues[i], varianceBuffer);
                 for (int row = 0; row < height; ++row) {
                     for (int col = 0; col < width; ++col) {
-                        var delta = pixelValues[i][col, row].Value - varianceBuffer[col, row].Value;
-                        var mean = varianceBuffer[col, row];
+                        var delta = pixelValues[i].GetPixel(col, row) - varianceBuffer.GetPixel(col, row);
+                        var mean = varianceBuffer.GetPixel(col, row);
 
                         var variance = delta * delta * curIteration;
-                        varianceBuffer[col, row] = new(variance);
+                        varianceBuffer.SetPixel(col, row, variance);
                     }
                 }
                 filter.Apply(varianceBuffer, varianceFactors[i]);
@@ -69,12 +70,12 @@ namespace MisForCorrelatedBidir.Common {
                 // Compute the ratio for all non-zero pixels
                 for (int row = 0; row < height; ++row) {
                     for (int col = 0; col < width; ++col) {
-                        var variance = varianceFactors[i][col, row].Value;
-                        var moment = momentBuffer[col, row].Value;
+                        var variance = varianceFactors[i].GetPixel(col, row);
+                        var moment = momentBuffer.GetPixel(col, row);
                         if (variance > 0) {
-                            varianceBuffer[col, row] = new(moment / variance);
+                            varianceBuffer.SetPixel(col, row, moment / variance);
                         } else {
-                            varianceBuffer[col, row] = new(1);
+                            varianceBuffer.SetPixel(col, row, 1);
                         }
                     }
                 }
@@ -87,56 +88,56 @@ namespace MisForCorrelatedBidir.Common {
         }
 
         public void Add(int cameraPathEdges, int lightPathEdges, int totalEdges,
-                        Vector2 filmPoint, ColorRGB value) {
+                        Vector2 filmPoint, RgbColor value) {
             bool isNextEvent = lightPathEdges == 0 && cameraPathEdges == totalEdges - 1;
             if (isNextEvent && cameraPathEdges > 1) { // Direct illumination has zero covariance
-                moments[cameraPathEdges - 2].Splat(filmPoint.X, filmPoint.Y,
-                    new((value * value / curIteration).Average));
-                pixelValues[cameraPathEdges - 2].Splat(filmPoint.X, filmPoint.Y,
-                    new(value.Average / curIteration));
+                moments[cameraPathEdges - 2].AtomicAdd((int)filmPoint.X, (int)filmPoint.Y,
+                    (value * value / curIteration).Average);
+                pixelValues[cameraPathEdges - 2].AtomicAdd((int)filmPoint.X, (int)filmPoint.Y,
+                    value.Average / curIteration);
             }
         }
 
         public float Get(int cameraPathEdges, Vector2 filmPoint) {
             if (!isReady) return 1.0f;
             if (cameraPathEdges < 2) return 1.0f;
-            return varianceFactors[cameraPathEdges - 2][filmPoint.X, filmPoint.Y].Value;
+            return varianceFactors[cameraPathEdges - 2].GetPixel((int)filmPoint.X, (int)filmPoint.Y);
         }
 
         public void WriteToFiles(string basename) {
             for (int i = 0; i < varianceFactors.Count; ++i) {
                 var filename = $"{basename}-nextevt-{i+2}.exr";
-                Image<Scalar>.WriteToFile(varianceFactors[i], filename);
+                varianceFactors[i].WriteToFile(filename);
 
                 filename = $"{basename}-moments-nextevt-{i+2}.exr";
-                Image<Scalar>.WriteToFile(moments[i], filename);
+                moments[i].WriteToFile(filename);
 
                 filename = $"{basename}-means-nextevt-{i+2}.exr";
-                Image<Scalar>.WriteToFile(pixelValues[i], filename);
+                pixelValues[i].WriteToFile(filename);
             }
         }
 
         bool isReady = false;
         int curIteration = 0;
         int maxDepth;
-        List<Image<Scalar>> moments;
-        List<Image<Scalar>> pixelValues;
-        List<Image<Scalar>> varianceFactors;
+        List<MonochromeImage> moments;
+        List<MonochromeImage> pixelValues;
+        List<MonochromeImage> varianceFactors;
     }
 
     public class VarAwareMisBidir : ClassicBidir {
         NextEventVarianceFactors varianceFactors;
 
-        public override void RegisterSample(ColorRGB weight, float misWeight, Vector2 pixel,
+        public override void RegisterSample(RgbColor weight, float misWeight, Vector2 pixel,
                                             int cameraPathLength, int lightPathLength, int fullLength) {
             base.RegisterSample(weight, misWeight, pixel, cameraPathLength, lightPathLength, fullLength);
             varianceFactors.Add(cameraPathLength, lightPathLength, fullLength, pixel, weight);
         }
 
-        public override ColorRGB OnCameraHit(CameraPath path, RNG rng, int pixelIndex, Ray ray,
-                                             SurfacePoint hit, float pdfFromAncestor, ColorRGB throughput,
+        public override RgbColor OnCameraHit(CameraPath path, RNG rng, int pixelIndex, Ray ray,
+                                             SurfacePoint hit, float pdfFromAncestor, RgbColor throughput,
                                              int depth, float toAncestorJacobian) {
-            ColorRGB value = ColorRGB.Black;
+            RgbColor value = RgbColor.Black;
 
             // Was a light hit?
             Emitter light = scene.QueryEmitter(hit);
@@ -149,8 +150,8 @@ namespace MisForCorrelatedBidir.Common {
                 if (EnableConnections)
                     value += throughput * BidirConnections(pixelIndex, hit, -ray.Direction, rng, path, toAncestorJacobian);
 
-                var nextEvtSum = ColorRGB.Black;
-                var nextEvtSumSqr = ColorRGB.Black;
+                var nextEvtSum = RgbColor.Black;
+                var nextEvtSumSqr = RgbColor.Black;
                 for (int i = 0; i < NumShadowRays; ++i) {
                     var c = throughput * PerformNextEventEstimation(ray, hit, rng, path, toAncestorJacobian);
                     nextEvtSum += c;
@@ -210,8 +211,9 @@ namespace MisForCorrelatedBidir.Common {
             int lastCameraVertexIdx = numPdfs - 1;
 
             if (numPdfs == 1) return 1.0f; // sole technique for rendering directly visible lights.
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
             pathPdfs.GatherCameraPdfs(cameraPath, lastCameraVertexIdx);
 
             pathPdfs.PdfsLightToCamera[^2] = pdfEmit;
@@ -237,8 +239,9 @@ namespace MisForCorrelatedBidir.Common {
                                              float pdfNextEvent, Vector2 pixel, float distToCam) {
             int numPdfs = lightVertex.Depth + 1;
             int lastCameraVertexIdx = -1;
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
 
             pathPdfs.GatherLightPdfs(lightVertex, lastCameraVertexIdx, numPdfs);
 
@@ -259,8 +262,9 @@ namespace MisForCorrelatedBidir.Common {
                                               float pdfNextEvent) {
             int numPdfs = cameraPath.Vertices.Count + lightVertex.Depth + 1;
             int lastCameraVertexIdx = cameraPath.Vertices.Count - 1;
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
             pathPdfs.GatherCameraPdfs(cameraPath, lastCameraVertexIdx);
             pathPdfs.GatherLightPdfs(lightVertex, lastCameraVertexIdx, numPdfs);
 
@@ -286,8 +290,9 @@ namespace MisForCorrelatedBidir.Common {
                                            float pdfHit, float pdfReverse) {
             int numPdfs = cameraPath.Vertices.Count + 1;
             int lastCameraVertexIdx = numPdfs - 2;
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
 
             pathPdfs.GatherCameraPdfs(cameraPath, lastCameraVertexIdx);
 

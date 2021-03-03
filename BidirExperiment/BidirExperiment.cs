@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using SeeSharp.Core;
 using SeeSharp.Integrators;
 using SeeSharp.Integrators.Bidir;
-using SeeSharp.Core.Image;
 using MisForCorrelatedBidir.Common;
+using SeeSharp.Image;
+using SeeSharp;
 
 namespace MisForCorrelatedBidir.BidirExperiment {
     class BidirExperiment : SeeSharp.Experiments.ExperimentFactory {

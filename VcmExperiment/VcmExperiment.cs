@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using SeeSharp.Core;
 using SeeSharp.Integrators;
 using SeeSharp.Integrators.Bidir;
-using SeeSharp.Core.Image;
 using MisForCorrelatedBidir.Common;
 using System;
+using SeeSharp.Image;
+using SeeSharp;
 
 namespace MisForCorrelatedBidir.VcmExperiment {
     class VcmExperiment : SeeSharp.Experiments.ExperimentFactory {

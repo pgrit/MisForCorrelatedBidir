@@ -1,5 +1,5 @@
 using System.Numerics;
-using SeeSharp.Core.Geometry;
+using SeeSharp.Geometry;
 using SeeSharp.Integrators.Common;
 
 namespace MisForCorrelatedBidir.Common {

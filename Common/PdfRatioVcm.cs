@@ -91,8 +91,9 @@ namespace MisForCorrelatedBidir.Common {
                                        float pdfLightReverse, float pdfNextEvent) {
             int numPdfs = cameraPath.Vertices.Count + lightVertex.Depth;
             int lastCameraVertexIdx = cameraPath.Vertices.Count - 1;
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
             pathPdfs.GatherCameraPdfs(cameraPath, lastCameraVertexIdx);
             pathPdfs.GatherLightPdfs(lightVertex, lastCameraVertexIdx - 1, numPdfs);
 
@@ -136,7 +137,9 @@ namespace MisForCorrelatedBidir.Common {
             if (numPdfs == 1) return 1.0f; // sole technique for rendering directly visible lights.
 
             // Gather the pdfs
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
             pathPdfs.GatherCameraPdfs(cameraPath, lastCameraVertexIdx);
             pathPdfs.PdfsLightToCamera[^2] = pdfEmit;
 
@@ -163,8 +166,9 @@ namespace MisForCorrelatedBidir.Common {
                                              float pdfNextEvent, Vector2 pixel, float distToCam) {
             int numPdfs = lightVertex.Depth + 1;
             int lastCameraVertexIdx = -1;
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
             pathPdfs.GatherLightPdfs(lightVertex, lastCameraVertexIdx, numPdfs);
             pathPdfs.PdfsCameraToLight[0] = pdfCamToPrimary;
             pathPdfs.PdfsCameraToLight[1] = pdfReverse + pdfNextEvent;
@@ -187,8 +191,9 @@ namespace MisForCorrelatedBidir.Common {
                                               float pdfNextEvent) {
             int numPdfs = cameraPath.Vertices.Count + lightVertex.Depth + 1;
             int lastCameraVertexIdx = cameraPath.Vertices.Count - 1;
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
             pathPdfs.GatherCameraPdfs(cameraPath, lastCameraVertexIdx);
             pathPdfs.GatherLightPdfs(lightVertex, lastCameraVertexIdx, numPdfs);
 
@@ -217,8 +222,9 @@ namespace MisForCorrelatedBidir.Common {
                                            float pdfHit, float pdfReverse) {
             int numPdfs = cameraPath.Vertices.Count + 1;
             int lastCameraVertexIdx = numPdfs - 2;
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
 
             pathPdfs.GatherCameraPdfs(cameraPath, lastCameraVertexIdx);
 

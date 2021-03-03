@@ -1,10 +1,10 @@
 using System;
 using System.Numerics;
-using SeeSharp.Core;
-using SeeSharp.Core.Shading;
+using SeeSharp;
 using SeeSharp.Integrators;
 using SeeSharp.Integrators.Bidir;
 using SeeSharp.Integrators.Common;
+using SimpleImageIO;
 
 namespace MisForCorrelatedBidir.Common {
     public class VarAwareMisVcm : VertexConnectionAndMerging {
@@ -14,7 +14,7 @@ namespace MisForCorrelatedBidir.Common {
         public bool ResetAfterTraining = false;
         public VarAwareMisVcm Prepass;
 
-        public override void RegisterSample(ColorRGB weight, float misWeight, Vector2 pixel,
+        public override void RegisterSample(RgbColor weight, float misWeight, Vector2 pixel,
                                             int cameraPathLength, int lightPathLength, int fullLength) {
             base.RegisterSample(weight, misWeight, pixel, cameraPathLength, lightPathLength, fullLength);
             varianceFactors.Add(cameraPathLength, lightPathLength, fullLength, pixel, weight);
@@ -51,8 +51,9 @@ namespace MisForCorrelatedBidir.Common {
                                        float pdfLightReverse, float pdfNextEvent) {
             int numPdfs = cameraPath.Vertices.Count + lightVertex.Depth;
             int lastCameraVertexIdx = cameraPath.Vertices.Count - 1;
-
-            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, numPdfs);
+            Span<float> camToLight = stackalloc float[numPdfs];
+            Span<float> lightToCam = stackalloc float[numPdfs];
+            var pathPdfs = new BidirPathPdfs(lightPaths.PathCache, lightToCam, camToLight);
             pathPdfs.GatherCameraPdfs(cameraPath, lastCameraVertexIdx);
             pathPdfs.GatherLightPdfs(lightVertex, lastCameraVertexIdx - 1, numPdfs);
 
