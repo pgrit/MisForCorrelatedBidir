@@ -2,9 +2,9 @@
 
 ![](Teaser.png)
 
-Implementation of the Eurographics 2021 Paper "Correlation-Aware Multiple Importance Sampling for Bidirectional Rendering Algorithms" by Pascal Grittmann, Iliyan Georgiev, and Philipp Slusallek.
+Implementation of [the Eurographics 2021 Paper](http://www.iliyan.com/publications/CorrelationAwareMIS) "Correlation-Aware Multiple Importance Sampling for Bidirectional Rendering Algorithms" by [Pascal Grittmann](https://graphics.cg.uni-saarland.de/people/grittmann.html), [Iliyan Georgiev](http://www.iliyan.com), and [Philipp Slusallek](https://graphics.cg.uni-saarland.de/slusallek/).
 
-This is the original codebase used to generate all results and figures in the paper and its supplemental.
+This is an updated / improved version of the original codebase used to generate all results and figures in the paper and its supplemental. The results should be very close to those in the paper, but might not be identical.
 
 ## Building and running
 
