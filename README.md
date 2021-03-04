@@ -4,7 +4,7 @@
 
 Implementation of [the Eurographics 2021 Paper](http://www.iliyan.com/publications/CorrelationAwareMIS) "Correlation-Aware Multiple Importance Sampling for Bidirectional Rendering Algorithms" by [Pascal Grittmann](https://graphics.cg.uni-saarland.de/people/grittmann.html), [Iliyan Georgiev](http://www.iliyan.com), and [Philipp Slusallek](https://graphics.cg.uni-saarland.de/slusallek/).
 
-This is an updated / improved version of the original codebase used to generate all results and figures in the paper and its supplemental. The results should be very close to those in the paper, but might not be identical.
+This is an updated / improved version of the original codebase used to generate all results and figures in the paper and its supplemental. The results should be very close to those in the paper, but might not be identical. The original codebase can be found in the [Releases](https://github.com/pgrit/MisForCorrelatedBidir/releases/tag/v1.0.0).
 
 ## Building and running
 
@@ -34,10 +34,10 @@ cd VcmExperiment
 python ./makefigures.py
 ```
 
-## Compiling SeeSharp ([version 0.2.1](https://github.com/pgrit/SeeSharp/releases/tag/v0.2.1))
+## Compiling SeeSharp ([version 1.4.0](https://github.com/pgrit/SeeSharp/releases/tag/v1.4.0))
 
 The rendering experiments are based on the SeeSharp rendering framework.
-They have been tested with version 0.2.1, which is available via Nuget.
+They have been tested with version 1.4.0, which is available via Nuget.
 
 <a href="https://www.nuget.org/packages/SeeSharp/"><img src="https://buildstats.info/nuget/SeeSharp" /></a>
 
@@ -49,7 +49,7 @@ The source code, but NOT the figures and test scenes, is released under the same
 
 Copyright of the test scenes:
 
-- The ContemporaryBathroom, ModernHall, and MinimalistWhiteRoom scenes were shared by [Wig42 on Blend Swap](https://www.blendswap.com/profile/130393) (CC-BY)
+- The ModernHall and MinimalistWhiteRoom scenes were shared by [Wig42 on Blend Swap](https://www.blendswap.com/profile/130393) (CC-BY)
 - The TargetPractice scene was modelled by Vladislav Hnatovskiy and Mira Niemann (CC-BY). License info on the textures and meshes of that scene can be found in the [Scenes/TargetPractice/License.md](Scenes/TargetPractice/License.md) file.
 - The Box, HomeOffice, IndirectRoom, LampCaustic, and RoughGlasses scenes were modelled by Pascal Grittmann (CC-0)
 
