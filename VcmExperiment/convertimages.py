@@ -6,7 +6,6 @@ from figuregen.util.image import lin_to_srgb
 
 scenes = {
     "TargetPractice",
-    "ContemporaryBathroom",
     "HomeOffice",
     "IndirectRoom",
     "RoughGlasses",

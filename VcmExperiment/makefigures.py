@@ -59,12 +59,6 @@ additional_figure_params = [
         "\\textsc{Modern Hall}", 1, False,
         ["35s", "35s", "50s", "35s", "240s"], [73,14,3]),
 
-    (methods, "Results/ContemporaryBathroom",
-        util.image.Cropbox(top=90*2, left=570*2, width=64*2, height=48*2, scale=crop_scale),
-        util.image.Cropbox(top=300*2, left=190*2, width=64*2, height=48*2, scale=crop_scale),
-        "\\textsc{Bathroom}", 0, False,
-        ["41s", "41s", "55s", "41s", "260s"], [73,14,3]),
-
     (methods, "Results/RoughGlasses",
         util.image.Cropbox(top=240*2, left=445*2, width=64*2, height=48*2, scale=crop_scale),
         util.image.Cropbox(top=260*2, left=525*2, width=64*2, height=48*2, scale=crop_scale),

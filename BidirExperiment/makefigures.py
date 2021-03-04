@@ -52,12 +52,6 @@ def make(variant):
             "\\textsc{Target Practice}", 1, False,
             ["260s", "260s", "280s", "260s"]),
 
-        (methods, f"{variant}/ContemporaryBathroom",
-            util.image.Cropbox(top=90*2, left=570*2, width=64*2, height=48*2, scale=crop_scale),
-            util.image.Cropbox(top=300*2, left=190*2, width=64*2, height=48*2, scale=crop_scale),
-            "\\textsc{Bathroom}", 1, False,
-            ["90s", "90s", "93s", "90s"]),
-
         (methods, f"{variant}/HomeOffice",
             util.image.Cropbox(top=80*2, left=570*2, width=64*2, height=48*2, scale=crop_scale),
             util.image.Cropbox(top=170*2, left=345*2, width=64*2, height=48*2, scale=crop_scale),

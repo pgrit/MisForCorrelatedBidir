@@ -12,7 +12,6 @@ namespace MisForCorrelatedBidir.BidirExperiment {
                 SceneRegistry.LoadScene("ModernHall"),
                 SceneRegistry.LoadScene("LivingRoom"),
                 SceneRegistry.LoadScene("TargetPractice"),
-                SceneRegistry.LoadScene("ContemporaryBathroom"),
                 SceneRegistry.LoadScene("HomeOffice"),
                 SceneRegistry.LoadScene("RoughGlasses"),
                 SceneRegistry.LoadScene("RoughGlassesIndirect"),

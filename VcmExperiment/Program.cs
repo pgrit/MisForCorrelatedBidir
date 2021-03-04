@@ -1,8 +1,7 @@
 ﻿using SeeSharp.Experiments;
-using System.Collections.Generic;
 using System.Globalization;
-using MisForCorrelatedBidir.Common;
 using SeeSharp.Image;
+using System.Diagnostics;
 
 namespace MisForCorrelatedBidir.VcmExperiment {
     class Program {
@@ -14,7 +13,6 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                 SceneRegistry.LoadScene("ModernHall"),
                 SceneRegistry.LoadScene("LivingRoom"),
                 SceneRegistry.LoadScene("TargetPractice"),
-                SceneRegistry.LoadScene("ContemporaryBathroom"),
                 SceneRegistry.LoadScene("HomeOffice"),
                 SceneRegistry.LoadScene("RoughGlasses", maxDepth: 10),
                 SceneRegistry.LoadScene("RoughGlassesIndirect", maxDepth: 10),
@@ -26,6 +24,8 @@ namespace MisForCorrelatedBidir.VcmExperiment {
             FrameBuffer.Flags.SendToTev);
 
             bench.Run();
+
+            Process.Start("python", "./makefigures.py").WaitForExit();
         }
 
         static void RunFovExperiment() {
@@ -67,7 +67,6 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                 SceneRegistry.LoadScene("ModernHall"),
                 SceneRegistry.LoadScene("LivingRoom"),
                 SceneRegistry.LoadScene("TargetPractice"),
-                SceneRegistry.LoadScene("ContemporaryBathroom"),
                 SceneRegistry.LoadScene("HomeOffice"),
                 SceneRegistry.LoadScene("RoughGlasses", maxDepth: 10),
                 SceneRegistry.LoadScene("RoughGlassesIndirect", maxDepth: 10),
@@ -79,11 +78,13 @@ namespace MisForCorrelatedBidir.VcmExperiment {
             FrameBuffer.Flags.SendToTev);
 
             bench.Run();
+
+            Process.Start("python", "./radiusfigure.py").WaitForExit();
         }
 
         static void Main(string[] args) {
             RunBench();
-            // RunRadiusExperiment();
+            RunRadiusExperiment();
             // RunFovExperiment();
         }
     }
