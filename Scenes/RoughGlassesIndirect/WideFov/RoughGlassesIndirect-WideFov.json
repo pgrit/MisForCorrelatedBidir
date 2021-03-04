@@ -17,6 +17,18 @@
       "baseColor": {
         "type": "rgb",
         "value": [
+          0.09083687514066696,
+          0.0410766527056694,
+          0.017500758171081543
+        ]
+      },
+      "name": "BrownCup.001"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
           0,
           0,
           0
@@ -189,12 +201,52 @@
       "emission": {
         "type": "rgb",
         "value": [
+          5000.0,
+          4661.545753479004,
+          4083.317816257477
+        ]
+      },
+      "name": "Material.001"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      "emission": {
+        "type": "rgb",
+        "value": [
           2.0,
           1.7740647792816162,
           1.4461102485656738
         ]
       },
       "name": "FillLight"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      "emission": {
+        "type": "rgb",
+        "value": [
+          2.3796794414520264,
+          2.826952278614044,
+          3.0
+        ]
+      },
+      "name": "FillLight.001"
     },
     {
       "type": "generic",
@@ -254,8 +306,8 @@
         1.2949029207229614
       ],
       "rotation": [
-        -30.90697232004471,
-        -25.071044339157837,
+        -24.012784277508942,
+        -15.058098006493156,
         0.0
       ],
       "scale": [
@@ -267,7 +319,7 @@
   ],
   "cameras": [
     {
-      "fov": 29.698316501828472,
+      "fov": 120,
       "transform": "camera",
       "name": "default",
       "type": "perspective"
@@ -277,7 +329,7 @@
     {
       "name": "scene",
       "type": "obj",
-      "relativePath": "RoughGlasses-Indirect-Lens.obj"
+      "relativePath": "../RoughGlasses-Indirect.obj"
     }
   ]
 }

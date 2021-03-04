@@ -271,7 +271,7 @@
     {
       "name": "scene",
       "type": "obj",
-      "relativePath": "RoughGlasses.obj"
+      "relativePath": "../RoughGlasses.obj"
     }
   ]
 }

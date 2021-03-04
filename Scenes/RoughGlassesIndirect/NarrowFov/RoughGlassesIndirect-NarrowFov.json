@@ -306,8 +306,8 @@
         1.2949029207229614
       ],
       "rotation": [
-        -24.012784277508942,
-        -15.058098006493156,
+        -17.869213534190067,
+        -21.496106252100237,
         0.0
       ],
       "scale": [
@@ -319,7 +319,7 @@
   ],
   "cameras": [
     {
-      "fov": 120,
+      "fov": 4.0,
       "transform": "camera",
       "name": "default",
       "type": "perspective"
@@ -329,7 +329,7 @@
     {
       "name": "scene",
       "type": "obj",
-      "relativePath": "RoughGlasses-Indirect.obj"
+      "relativePath": "../RoughGlasses-Indirect.obj"
     }
   ]
 }

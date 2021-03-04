@@ -5,44 +5,12 @@
       "baseColor": {
         "type": "rgb",
         "value": [
-          0.02037898264825344,
-          0.02037898264825344,
-          0.02037898264825344
-        ]
-      },
-      "name": "Blocker"
-    },
-    {
-      "type": "diffuse",
-      "baseColor": {
-        "type": "rgb",
-        "value": [
           0.09083687514066696,
           0.0410766527056694,
           0.017500758171081543
         ]
       },
       "name": "BrownCup.001"
-    },
-    {
-      "type": "diffuse",
-      "baseColor": {
-        "type": "rgb",
-        "value": [
-          0,
-          0,
-          0
-        ]
-      },
-      "emission": {
-        "type": "rgb",
-        "value": [
-          500.0,
-          190.74495136737823,
-          57.65287205576897
-        ]
-      },
-      "name": "Candlelight"
     },
     {
       "type": "generic",
@@ -85,6 +53,38 @@
         ]
       },
       "name": "Dots_Stroke"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          1.0,
+          0.8722190260887146,
+          0.8187828063964844
+        ]
+      },
+      "name": "Filler.001"
+    },
+    {
+      "type": "diffuse",
+      "baseColor": {
+        "type": "rgb",
+        "value": [
+          0,
+          0,
+          0
+        ]
+      },
+      "emission": {
+        "type": "rgb",
+        "value": [
+          2.3796794414520264,
+          2.826952278614044,
+          3.0
+        ]
+      },
+      "name": "FillLight"
     },
     {
       "type": "generic",
@@ -213,64 +213,6 @@
       "baseColor": {
         "type": "rgb",
         "value": [
-          0,
-          0,
-          0
-        ]
-      },
-      "emission": {
-        "type": "rgb",
-        "value": [
-          2.0,
-          1.7740647792816162,
-          1.4461102485656738
-        ]
-      },
-      "name": "FillLight"
-    },
-    {
-      "type": "diffuse",
-      "baseColor": {
-        "type": "rgb",
-        "value": [
-          0,
-          0,
-          0
-        ]
-      },
-      "emission": {
-        "type": "rgb",
-        "value": [
-          2.3796794414520264,
-          2.826952278614044,
-          3.0
-        ]
-      },
-      "name": "FillLight.001"
-    },
-    {
-      "type": "generic",
-      "baseColor": {
-        "type": "rgb",
-        "value": [
-          0.800000011920929,
-          0.800000011920929,
-          0.800000011920929
-        ]
-      },
-      "roughness": 1.0,
-      "anisotropic": 0.0,
-      "IOR": 1.4500000476837158,
-      "metallic": 0.0,
-      "specularTransmittance": 1.0,
-      "specularTint": 0.0,
-      "name": "Paper"
-    },
-    {
-      "type": "diffuse",
-      "baseColor": {
-        "type": "rgb",
-        "value": [
           0.3588409125804901,
           0.041681744158267975,
           0.018400367349386215
@@ -306,8 +248,8 @@
         1.2949029207229614
       ],
       "rotation": [
-        -17.869213534190067,
-        -21.496106252100237,
+        -24.012784277508942,
+        -15.058098006493156,
         0.0
       ],
       "scale": [
@@ -319,7 +261,7 @@
   ],
   "cameras": [
     {
-      "fov": 4.0,
+      "fov": 120,
       "transform": "camera",
       "name": "default",
       "type": "perspective"
@@ -329,7 +271,7 @@
     {
       "name": "scene",
       "type": "obj",
-      "relativePath": "RoughGlasses-Indirect.obj"
+      "relativePath": "../RoughGlasses.obj"
     }
   ]
 }

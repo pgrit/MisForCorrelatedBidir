@@ -41,12 +41,12 @@ namespace MisForCorrelatedBidir.VcmExperiment {
             foreach (float resolutionScale in resolutions) {
 
                 Benchmark bench = new(new VcmExperiment(true), new() {
-                    SceneRegistry.LoadScene("RoughGlassesIndirect", "Narrow", maxDepth: 10),
-                    SceneRegistry.LoadScene("RoughGlassesIndirect", "Wide", maxDepth: 10),
+                    SceneRegistry.LoadScene("RoughGlassesIndirect", "NarrowFov", maxDepth: 10),
+                    SceneRegistry.LoadScene("RoughGlassesIndirect", "WideFov", maxDepth: 10),
                     SceneRegistry.LoadScene("RoughGlassesIndirect", maxDepth: 10),
 
-                    SceneRegistry.LoadScene("RoughGlasses", "Narrow", maxDepth: 10),
-                    SceneRegistry.LoadScene("RoughGlasses", "Wide", maxDepth: 10),
+                    SceneRegistry.LoadScene("RoughGlasses", "NarrowFov", maxDepth: 10),
+                    SceneRegistry.LoadScene("RoughGlasses", "WideFov", maxDepth: 10),
                     SceneRegistry.LoadScene("RoughGlasses", maxDepth: 10),
 
                     SceneRegistry.LoadScene("RoughGlassesIndirect", "Lens", maxDepth: 10),
