@@ -3,57 +3,53 @@ using SeeSharp.Integrators;
 using SeeSharp.Integrators.Bidir;
 using MisForCorrelatedBidir.Common;
 using System;
-using SeeSharp.Image;
-using SeeSharp;
 
 namespace MisForCorrelatedBidir.VcmExperiment {
-    class VcmExperiment : SeeSharp.Experiments.ExperimentFactory {
-        public override FrameBuffer.Flags FrameBufferFlags => FrameBuffer.Flags.SendToTev;
-        public SceneConfig Scene { get; init; }
-
-        protected virtual int Samples => 4;
-        protected virtual int PrepassSamples => 16;
-
-        public VcmExperiment(SceneConfig scene, bool runQuickTest=false) {
-            Scene = scene;
-            this.runQuickTest = runQuickTest;
-        }
+    class VcmExperiment : SeeSharp.Experiments.Experiment {
         bool runQuickTest;
+        int samples;
+        int prepassSamples;
+
+        public VcmExperiment(bool runQuickTest = false, int samples = 4, int prepassSamples = 16) {
+            this.runQuickTest = runQuickTest;
+            this.samples = samples;
+            this.prepassSamples = prepassSamples;
+        }
 
         public override List<Method> MakeMethods() {
             var varAwarePrepass = new VarAwareMisVcm() {
-                MaxDepth = Scene.MaxDepth, NumIterations = PrepassSamples, MergePrimary = false,
+                NumIterations = prepassSamples, MergePrimary = false,
                 RenderTechniquePyramid = false
             };
 
             List<Method> result = new() {
                 new Method("VarAwareMisLive", new VarAwareMisVcm() {
-                    MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                    NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false, Prepass = null
                 }),
 
                 new Method("Vcm", new VertexConnectionAndMerging() {
-                    MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                    NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false
                 }),
 
                 new Method("PdfRatioFov", new PdfRatioVcm() {
-                    MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                    NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
                     RadiusInitializer = new RadiusInitFov { ScalingFactor = MathF.Tan(MathF.PI / 180) }
                 }),
                 new Method("PdfRatioScene", new PdfRatioVcm() {
-                    MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                    NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
                     RadiusInitializer = new RadiusInitScene { ScalingFactor = 0.01f }
                 }),
                 new Method("PdfRatioPixel", new PdfRatioVcm() {
-                    MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                    NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
                     RadiusInitializer = new RadiusInitPixel { ScalingFactor = 50 }
                 }),
                 new Method("PdfRatioCombined", new PdfRatioVcm() {
-                    MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                    NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
                     RadiusInitializer = new RadiusInitCombined {
                         Candidates = new() {
@@ -64,7 +60,7 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                 }),
 
                 new Method("JendersieFootprint", new JendersieFootprint() {
-                    MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                    NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false
                 }),
             };
@@ -72,19 +68,19 @@ namespace MisForCorrelatedBidir.VcmExperiment {
             if (!runQuickTest) {
                 result.AddRange(new List<Method>() {
                     new Method("PathTracer", new PathTracer() {
-                        MaxDepth = (uint)Scene.MaxDepth, TotalSpp = Samples * 2,
+                        TotalSpp = samples * 2,
                     }),
                     new Method("Bidir", new SeeSharp.Integrators.Bidir.ClassicBidir() {
-                        MaxDepth = Scene.MaxDepth, NumIterations = Samples,
+                        NumIterations = samples,
                         RenderTechniquePyramid = false
                     }),
                     new Method("VarAwarePrepass", varAwarePrepass),
                     new Method("VarAwareMis", new VarAwareMisVcm() {
-                        MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                        NumIterations = samples, MergePrimary = false,
                         RenderTechniquePyramid = false, Prepass = varAwarePrepass
                     }),
                     new Method("UpperBound", new PdfRatioVcm() {
-                        MaxDepth = Scene.MaxDepth, NumIterations = Samples, MergePrimary = false,
+                        NumIterations = samples, MergePrimary = false,
                         RenderTechniquePyramid = false, UseUpperBound = true
                     }),
                 });
@@ -92,8 +88,5 @@ namespace MisForCorrelatedBidir.VcmExperiment {
 
             return result;
         }
-
-        public override Scene MakeScene() => Scene.MakeScene();
-        public override Integrator MakeReferenceIntegrator() => Scene.MakeReferenceIntegrator();
     }
 }
