@@ -7,11 +7,14 @@ using System;
 namespace MisForCorrelatedBidir.VcmExperiment {
     class VcmExperiment : SeeSharp.Experiments.Experiment {
         bool runQuickTest;
+        bool altRadii;
         int samples;
         int prepassSamples;
 
-        public VcmExperiment(bool runQuickTest = false, int samples = 4, int prepassSamples = 16) {
+        public VcmExperiment(bool runQuickTest = false, bool altRadii = false, int samples = 4,
+                             int prepassSamples = 16) {
             this.runQuickTest = runQuickTest;
+            this.altRadii = altRadii;
             this.samples = samples;
             this.prepassSamples = prepassSamples;
         }
@@ -32,22 +35,6 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                     NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false
                 }),
-
-                new Method("PdfRatioFov", new PdfRatioVcm() {
-                    NumIterations = samples, MergePrimary = false,
-                    RenderTechniquePyramid = false,
-                    RadiusInitializer = new RadiusInitFov { ScalingFactor = MathF.Tan(MathF.PI / 180) }
-                }),
-                new Method("PdfRatioScene", new PdfRatioVcm() {
-                    NumIterations = samples, MergePrimary = false,
-                    RenderTechniquePyramid = false,
-                    RadiusInitializer = new RadiusInitScene { ScalingFactor = 0.01f }
-                }),
-                new Method("PdfRatioPixel", new PdfRatioVcm() {
-                    NumIterations = samples, MergePrimary = false,
-                    RenderTechniquePyramid = false,
-                    RadiusInitializer = new RadiusInitPixel { ScalingFactor = 50 }
-                }),
                 new Method("PdfRatioCombined", new PdfRatioVcm() {
                     NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false,
@@ -58,12 +45,31 @@ namespace MisForCorrelatedBidir.VcmExperiment {
                         }
                     }
                 }),
-
                 new Method("JendersieFootprint", new JendersieFootprint() {
                     NumIterations = samples, MergePrimary = false,
                     RenderTechniquePyramid = false
                 }),
             };
+
+            if (altRadii) {
+                result.AddRange(new List<Method>() {
+                    new Method("PdfRatioFov", new PdfRatioVcm() {
+                        NumIterations = samples, MergePrimary = false,
+                        RenderTechniquePyramid = false,
+                        RadiusInitializer = new RadiusInitFov { ScalingFactor = MathF.Tan(MathF.PI / 180) }
+                    }),
+                    new Method("PdfRatioScene", new PdfRatioVcm() {
+                        NumIterations = samples, MergePrimary = false,
+                        RenderTechniquePyramid = false,
+                        RadiusInitializer = new RadiusInitScene { ScalingFactor = 0.01f }
+                    }),
+                    new Method("PdfRatioPixel", new PdfRatioVcm() {
+                        NumIterations = samples, MergePrimary = false,
+                        RenderTechniquePyramid = false,
+                        RadiusInitializer = new RadiusInitPixel { ScalingFactor = 50 }
+                    }),
+                });
+            }
 
             if (!runQuickTest) {
                 result.AddRange(new List<Method>() {

@@ -82,7 +82,22 @@ namespace MisForCorrelatedBidir.VcmExperiment {
             Process.Start("python", "./radiusfigure.py").WaitForExit();
         }
 
+        static void RunFastFwdExperiment() {
+            SceneRegistry.AddSource("../Scenes");
+            float resolutionScale = 2.0f;
+            Benchmark bench = new(new VcmExperiment(true, false), new() {
+                SceneRegistry.LoadScene("LampCaustic", maxDepth: 10),
+                SceneRegistry.LoadScene("LampCausticNoShade", maxDepth: 10),
+            },
+            $"Results-FastForward",
+            (int)(640 * resolutionScale), (int)(480 * resolutionScale),
+            FrameBuffer.Flags.SendToTev);
+
+            bench.Run();
+        }
+
         static void Main(string[] args) {
+            RunFastFwdExperiment();
             RunBench();
             RunRadiusExperiment();
             // RunFovExperiment();
